@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Entre em contato com a Lixinho Tropical para shows, booking e parcerias.">
+  <title>Contato — Lixinho Tropical</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-info { position: sticky; top: calc(var(--nav-h) + 2rem); }
+    .contact-channel {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(245,240,232,0.07);
+    }
+    .contact-channel:first-of-type { border-top: 1px solid rgba(245,240,232,0.07); }
+    .contact-channel-icon {
+      width: 44px; height: 44px;
+      background: rgba(232,0,28,0.12);
+      border: 1px solid rgba(232,0,28,0.2);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--red);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-channel-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.4); margin-bottom: 0.3rem; }
+    .contact-channel-value { font-size: 0.9rem; color: var(--white); }
+    .contact-channel-value a { color: var(--cyan); }
+
+    .form-card {
+      background: var(--gray-dark);
+      border: 1px solid rgba(245,240,232,0.06);
+      padding: 2.5rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .form-success .icon { font-size: 3rem; margin-bottom: 1rem; }
+    .form-success h3 { font-family: var(--font-display); font-size: 2rem; color: var(--red); margin-bottom: 0.75rem; }
+
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-info { position: static; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav" role="navigation" aria-label="Menu principal">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../index.html"><img src="../assets/img/logo.png" alt="Lixinho Tropical"></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Início</a></li><li><a href="sobre.html">A Banda</a></li>
+      <li><a href="show.html">O Show</a></li><li><a href="agenda.html">Agenda</a></li>
+      <li><a href="fotos.html">Fotos</a></li><li><a href="videos.html">Vídeos</a></li>
+      <li><a href="clipping.html">Clipping</a></li><li><a href="loja.html">Loja</a></li>
+      <li><a href="musicas.html">Músicas</a></li>
+      <li><a href="contato.html" class="btn btn-red nav-cta">Contato</a></li>
+    </ul>
+    <button id="hamburger" class="hamburger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div id="mobile-nav" class="nav-mobile">
+  <a href="../index.html">Início</a><a href="sobre.html">A Banda</a><a href="show.html">O Show</a>
+  <a href="agenda.html">Agenda</a><a href="fotos.html">Fotos</a><a href="videos.html">Vídeos</a>
+  <a href="clipping.html">Clipping</a><a href="loja.html">Loja</a><a href="musicas.html">Músicas</a>
+  <a href="contato.html">Contato</a>
+</div>
+
+<header class="page-hero" data-title="CONTATO">
+  <div class="container">
+    <p class="section-label" data-reveal>Booking & Parcerias</p>
+    <h1 data-reveal>Bora <span class="text-red">Tocar!</span></h1>
+    <p class="mt-3" style="max-width:480px;color:rgba(245,240,232,0.65)" data-reveal>
+      Entre em contato para shows, eventos, residências artísticas e parcerias.
+    </p>
+  </div>
+</header>
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">Lixinho Tropical</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Booking · São Paulo, SP</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">lixinhotropical@gmail.com</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">(11) 98421-4384</span><span class="ticker-sep">✦</span>
+  </div>
+</div>
+
+<section class="section" aria-label="Formulário de contato">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- INFO -->
+      <div class="contact-info">
+        <p class="section-label" data-reveal>Fale com a gente</p>
+        <h2 class="mb-3" data-reveal><span class="text-cyan">Contato</span><br>Direto</h2>
+
+        <div class="contact-channel" data-reveal>
+          <div class="contact-channel-icon">✉</div>
+          <div>
+            <div class="contact-channel-label">E-mail</div>
+            <div class="contact-channel-value"><a href="mailto:lixinhotropical@gmail.com">lixinhotropical@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-channel" data-reveal>
+          <div class="contact-channel-icon">📱</div>
+          <div>
+            <div class="contact-channel-label">WhatsApp</div>
+            <div class="contact-channel-value"><a href="https://wa.me/5511984214384" target="_blank" rel="noopener">(11) 98421-4384</a></div>
+          </div>
+        </div>
+        <div class="contact-channel" data-reveal>
+          <div class="contact-channel-icon">📍</div>
+          <div>
+            <div class="contact-channel-label">Base</div>
+            <div class="contact-channel-value">São Paulo, SP<br>Disponíveis para viagens</div>
+          </div>
+        </div>
+        <div class="contact-channel" data-reveal>
+          <div class="contact-channel-icon">IG</div>
+          <div>
+            <div class="contact-channel-label">Instagram</div>
+            <div class="contact-channel-value"><a href="https://www.instagram.com/lixinhotropical/" target="_blank" rel="noopener">@lixinhotropical</a></div>
+          </div>
+        </div>
+
+        <div class="mt-4" data-reveal>
+          <a href="https://wa.me/5511984214384" class="btn btn-cyan" target="_blank" rel="noopener" style="width:100%;justify-content:center">
+            Chamar no WhatsApp →
+          </a>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div data-reveal>
+        <div class="form-card">
+          <h3 style="font-family:var(--font-display);font-size:1.8rem;margin-bottom:1.5rem">Enviar Mensagem</h3>
+          <div id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="nome">Nome *</label>
+                <input class="form-input" id="nome" type="text" placeholder="Seu nome" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">E-mail *</label>
+                <input class="form-input" id="email" type="email" placeholder="seu@email.com" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="tel">Telefone / WhatsApp</label>
+                <input class="form-input" id="tel" type="tel" placeholder="(11) 99999-9999">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="assunto">Assunto *</label>
+                <select class="form-select" id="assunto" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option>Booking / Contratação de show</option>
+                  <option>Evento privado / Corporativo</option>
+                  <option>Residência artística</option>
+                  <option>Parceria / Colaboração</option>
+                  <option>Imprensa</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="data">Data do evento (se houver)</label>
+              <input class="form-input" id="data" type="date">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="mensagem">Mensagem *</label>
+              <textarea class="form-textarea" id="mensagem" placeholder="Conte mais sobre o que você precisa..." required></textarea>
+            </div>
+            <button class="btn btn-red" style="width:100%;justify-content:center;margin-top:0.5rem" onclick="submitForm(event)">
+              Enviar mensagem →
+            </button>
+            <p style="font-size:0.75rem;color:rgba(245,240,232,0.3);margin-top:1rem;text-align:center">
+              Respondemos em até 48h. Para urgências, use o WhatsApp.
+            </p>
+          </div>
+          <div class="form-success" id="form-success">
+            <div class="icon">✓</div>
+            <h3>Mensagem Enviada!</h3>
+            <p style="color:rgba(245,240,232,0.6)">Recebemos seu contato e retornaremos em breve.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand"><img src="../assets/img/logo.png" alt="Lixinho Tropical"><p class="footer-tagline">Música Safada Brasileira<br>São Paulo – SP</p><div class="footer-socials"><a href="https://www.instagram.com/lixinhotropical/" class="social-link social-ig" aria-label="Instagram" target="_blank" rel="noopener"><span data-social-icon="instagram"></span></a><a href="https://open.spotify.com/intl-pt/artist/3noX4LW5rgdaEjRDBNDcei?si=TKRuq_6HRUKj_NIrK3AUfQ" class="social-link social-sp" aria-label="Spotify" target="_blank" rel="noopener"><span data-social-icon="spotify"></span></a><a href="https://soundcloud.com/lixinho-tropical" class="social-link social-sc" aria-label="SoundCloud" target="_blank" rel="noopener"><span data-social-icon="soundcloud"></span></a><a href="https://www.youtube.com/@lixinhotropical" class="social-link social-yt" aria-label="YouTube" target="_blank" rel="noopener"><span data-social-icon="youtube"></span></a><a href="https://www.tiktok.com/@lixinhotropical" class="social-link social-tt" aria-label="TikTok" target="_blank" rel="noopener"><span data-social-icon="tiktok"></span></a></div></div>
+      <div><p class="footer-col-title">Navegação</p><ul class="footer-col-links"><li><a href="../index.html">Início</a></li><li><a href="sobre.html">A Banda</a></li><li><a href="show.html">O Show</a></li><li><a href="agenda.html">Agenda</a></li></ul></div>
+      <div><p class="footer-col-title">Mais</p><ul class="footer-col-links"><li><a href="loja.html">Lojinha</a></li><li><a href="musicas.html">Músicas</a></li><li><a href="fotos.html">Fotos</a></li><li><a href="videos.html">Vídeos</a></li></ul></div>
+      <div><p class="footer-col-title">Contato</p><ul class="footer-col-links"><li><a href="mailto:lixinhotropical@gmail.com">lixinhotropical@gmail.com</a></li><li><a href="https://wa.me/5511984214384" target="_blank">(11) 98421-4384</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">© 2025 Lixinho Tropical.</p><nav class="footer-legal"><a href="cookies.html">Cookies</a><a href="termos.html">Termos</a><a href="suporte.html">Suporte</a></nav></div>
+  </div>
+</footer>
+<div id="cookie-banner" role="dialog" style="display:none;"><p>Usamos cookies. <a href="cookies.html">Saiba mais</a>.</p><div class="cookie-actions"><button id="cookie-accept">Aceitar</button><button id="cookie-decline">Recusar</button></div></div>
+
+<script src="../js/global.js"></script>
+<script>
+function submitForm(e) {
+  e.preventDefault();
+  const nome = document.getElementById('nome').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const assunto = document.getElementById('assunto').value;
+  const msg = document.getElementById('mensagem').value.trim();
+  if (!nome || !email || !assunto || !msg) {
+    alert('Por favor, preencha todos os campos obrigatórios (*).');
+    return;
+  }
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+</script>
+<script src="../js/social-icons.js"></script>
+</body>
+</html>

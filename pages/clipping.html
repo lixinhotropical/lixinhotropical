@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Clipping da Lixinho Tropical — palcos e espaços onde já tocamos.">
+  <title>Clipping — Lixinho Tropical</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <style>
+    .venues-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .venue-card { background: var(--gray-dark); border: 1px solid rgba(245,240,232,0.06); padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; transition: border-color 0.2s; }
+    .venue-card:hover { border-color: rgba(232,0,28,0.3); }
+    .venue-year { font-family: var(--font-display); font-size: 1rem; color: var(--red); }
+    .venue-name { font-family: var(--font-display); font-size: 1.5rem; }
+    .venue-city { font-size: 0.8rem; color: rgba(245,240,232,0.45); }
+    .venue-desc { font-size: 0.85rem; color: rgba(245,240,232,0.6); }
+    .partners-row { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 3rem; }
+    .partner-chip { padding: 0.6rem 1.5rem; border: 1px solid rgba(245,240,232,0.12); font-size: 0.85rem; color: rgba(245,240,232,0.6); }
+  </style>
+</head>
+<body>
+<nav id="nav" role="navigation" aria-label="Menu principal">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../index.html"><img src="../assets/img/logo.png" alt="Lixinho Tropical"></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Início</a></li><li><a href="sobre.html">A Banda</a></li>
+      <li><a href="show.html">O Show</a></li><li><a href="agenda.html">Agenda</a></li>
+      <li><a href="fotos.html">Fotos</a></li><li><a href="videos.html">Vídeos</a></li>
+      <li><a href="clipping.html">Clipping</a></li><li><a href="loja.html">Loja</a></li>
+      <li><a href="musicas.html">Músicas</a></li>
+      <li><a href="contato.html" class="btn btn-red nav-cta">Contato</a></li>
+    </ul>
+    <button id="hamburger" class="hamburger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div id="mobile-nav" class="nav-mobile">
+  <a href="../index.html">Início</a><a href="sobre.html">A Banda</a><a href="show.html">O Show</a>
+  <a href="agenda.html">Agenda</a><a href="fotos.html">Fotos</a><a href="videos.html">Vídeos</a>
+  <a href="clipping.html">Clipping</a><a href="loja.html">Loja</a><a href="musicas.html">Músicas</a><a href="contato.html">Contato</a>
+</div>
+
+<header class="page-hero" data-title="PALCOS">
+  <div class="container">
+    <p class="section-label" data-reveal>Por onde passamos</p>
+    <h1 data-reveal><span class="text-red">Clipping</span></h1>
+    <p class="mt-3" style="max-width:480px;color:rgba(245,240,232,0.65)" data-reveal>Palcos, eventos e espaços onde a Lixinho Tropical já tocou.</p>
+  </div>
+</header>
+<div class="ticker-wrap" aria-hidden="true"><div class="ticker-track"><span class="ticker-item">Casa de Francisca</span><span class="ticker-sep">✦</span><span class="ticker-item">Baiúca</span><span class="ticker-sep">✦</span><span class="ticker-item">Picles</span><span class="ticker-sep">✦</span><span class="ticker-item">Ocupação Fervo</span><span class="ticker-sep">✦</span><span class="ticker-item">Cotoxó 1175</span><span class="ticker-sep">✦</span><span class="ticker-item">IBT</span><span class="ticker-sep">✦</span></div></div>
+
+<section class="section">
+  <div class="container">
+    <p class="section-label mb-4" data-reveal>Palcos de São Paulo</p>
+    <div class="venues-grid">
+      <div class="venue-card" data-reveal>
+        <div class="venue-year">2024 – 2025</div>
+        <div class="venue-name">Casa de Francisca</div>
+        <div class="venue-city">São Paulo, SP</div>
+        <p class="venue-desc">Um dos palcos mais respeitados da cena independente paulistana. Apresentações com repertório autoral e convidados especiais.</p>
+      </div>
+      <div class="venue-card" data-reveal>
+        <div class="venue-year">2023 – 2024</div>
+        <div class="venue-name">Baiúca</div>
+        <div class="venue-city">São Paulo, SP</div>
+        <p class="venue-desc">Espaço cultural da Vila Madalena. Noites especiais com dança e muita música safada.</p>
+      </div>
+      <div class="venue-card" data-reveal>
+        <div class="venue-year">2023 – 2025</div>
+        <div class="venue-name">Picles Bar</div>
+        <div class="venue-city">São Paulo, SP</div>
+        <p class="venue-desc">Residência no Picles com plateia sempre lotada e energia única.</p>
+      </div>
+      <div class="venue-card" data-reveal>
+        <div class="venue-year">2022 – 2024</div>
+        <div class="venue-name">Ocupação Fervo</div>
+        <div class="venue-city">São Paulo, SP</div>
+        <p class="venue-desc">Espaço de referência para a cultura popular urbana. Shows memoráveis com o público do Fervo.</p>
+      </div>
+      <div class="venue-card" data-reveal>
+        <div class="venue-year">2024</div>
+        <div class="venue-name">Cotoxó 1175</div>
+        <div class="venue-city">São Paulo, SP</div>
+        <p class="venue-desc">Venue intimista e sofisticada. Apresentação acústica e repertório especial.</p>
+      </div>
+      <div class="venue-card" data-reveal>
+        <div class="venue-year">2025</div>
+        <div class="venue-name">IBT</div>
+        <div class="venue-city">Instituto Brasil de Teatro · SP</div>
+        <p class="venue-desc">Estreia num palco teatral. Show que mistura performance e música ao vivo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--gray-dark)">
+  <div class="container">
+    <p class="section-label" data-reveal>Projetos & Colaborações</p>
+    <h2 class="mb-4" data-reveal><span class="text-cyan">Parcerias</span> de Peso</h2>
+    <div style="max-width:700px">
+      <div class="card" style="padding:2rem;margin-bottom:1.5rem" data-reveal>
+        <p class="card-tag">Projeto Especial</p>
+        <h3 class="card-title">Baile Caju Amazônico</h3>
+        <p class="card-text">Festa de São João que mistura tradições do norte e nordeste do Brasil. Com a participação do mestre <strong style="color:var(--white)">Manoel Cordeiro</strong>. Um dos shows mais especiais da história da banda.</p>
+      </div>
+      <div class="card" style="padding:2rem" data-reveal>
+        <p class="card-tag">Produções</p>
+        <h3 class="card-title">Colaboradores</h3>
+        <p class="card-text">Produções com Klaus Sena, Ruan Reis e Sarah Ross. Parceria consolidada com o mestre Manoel Cordeiro.</p>
+      </div>
+    </div>
+    <div class="mt-4" data-reveal>
+      <p class="section-label mb-3">Já tocamos com</p>
+      <div class="partners-row">
+        <div class="partner-chip">Manoel Cordeiro</div>
+        <div class="partner-chip">Klaus Sena</div>
+        <div class="partner-chip">Ruan Reis</div>
+        <div class="partner-chip">Sarah Ross</div>
+        <div class="partner-chip">Sururu Lover's</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="container"><div class="footer-inner"><div class="footer-brand"><img src="../assets/img/logo.png" alt="Lixinho Tropical"><p class="footer-tagline">Música Safada Brasileira<br>São Paulo – SP</p><div class="footer-socials"><a href="https://www.instagram.com/lixinhotropical/" class="social-link social-ig" aria-label="Instagram" target="_blank" rel="noopener"><span data-social-icon="instagram"></span></a><a href="https://open.spotify.com/intl-pt/artist/3noX4LW5rgdaEjRDBNDcei?si=TKRuq_6HRUKj_NIrK3AUfQ" class="social-link social-sp" aria-label="Spotify" target="_blank" rel="noopener"><span data-social-icon="spotify"></span></a><a href="https://soundcloud.com/lixinho-tropical" class="social-link social-sc" aria-label="SoundCloud" target="_blank" rel="noopener"><span data-social-icon="soundcloud"></span></a><a href="https://www.youtube.com/@lixinhotropical" class="social-link social-yt" aria-label="YouTube" target="_blank" rel="noopener"><span data-social-icon="youtube"></span></a><a href="https://www.tiktok.com/@lixinhotropical" class="social-link social-tt" aria-label="TikTok" target="_blank" rel="noopener"><span data-social-icon="tiktok"></span></a></div></div><div><p class="footer-col-title">Navegação</p><ul class="footer-col-links"><li><a href="../index.html">Início</a></li><li><a href="sobre.html">A Banda</a></li><li><a href="agenda.html">Agenda</a></li><li><a href="fotos.html">Fotos</a></li></ul></div><div><p class="footer-col-title">Mais</p><ul class="footer-col-links"><li><a href="loja.html">Lojinha</a></li><li><a href="musicas.html">Músicas</a></li><li><a href="contato.html">Contato</a></li></ul></div><div><p class="footer-col-title">Contato</p><ul class="footer-col-links"><li><a href="mailto:lixinhotropical@gmail.com">lixinhotropical@gmail.com</a></li><li><a href="https://wa.me/5511984214384" target="_blank">(11) 98421-4384</a></li></ul></div></div><div class="footer-bottom"><p class="footer-copy">© 2025 Lixinho Tropical.</p><nav class="footer-legal"><a href="cookies.html">Cookies</a><a href="termos.html">Termos</a><a href="suporte.html">Suporte</a></nav></div></div></footer>
+<div id="cookie-banner" role="dialog" style="display:none;"><p>Usamos cookies. <a href="cookies.html">Saiba mais</a>.</p><div class="cookie-actions"><button id="cookie-accept">Aceitar</button><button id="cookie-decline">Recusar</button></div></div>
+<script src="../js/global.js"></script>
+<script src="../js/social-icons.js"></script>
+</body>
+</html>

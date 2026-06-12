@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lixinho Tropical — Música Safada Brasileira. Forró, Ijexá, Funk, Piseiro e Cumbia. São Paulo, SP.">
+  <title>Lixinho Tropical — Música Safada Brasileira</title>
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    /* ── HOME-SPECIFIC ── */
+    .hero { min-height: 100svh; }
+    .hero-bg-img {
+      background-image: url('assets/img/hero-bg.jpg');
+      opacity: 0.5;
+    }
+
+    /* SOBRE - SPLIT */
+    .about-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+    }
+    .about-img-accent {
+      position: absolute;
+      bottom: -2rem;
+      right: -2rem;
+      width: 55%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 3px solid var(--red);
+    }
+    .about-text h2 { margin-bottom: 1.5rem; }
+    .about-text p { color: rgba(245,240,232,0.7); margin-bottom: 1.25rem; }
+    .ritmos { display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 2rem 0; }
+
+    /* MEMBROS */
+    .members { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .member-card { position: relative; overflow: hidden; cursor: pointer; }
+    .member-card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; transition: transform 0.5s, opacity 0.3s; }
+    .member-card:hover img { transform: scale(1.05); opacity: 0.7; }
+    .member-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 2rem 1.25rem 1.25rem;
+      background: linear-gradient(to top, rgba(8,8,8,0.95), transparent);
+      transform: translateY(30px);
+      opacity: 0;
+      transition: all 0.3s;
+    }
+    .member-card:hover .member-info { transform: translateY(0); opacity: 1; }
+    .member-name { font-family: var(--font-display); font-size: 1.6rem; }
+    .member-role { font-size: 0.78rem; color: var(--cyan); letter-spacing: 0.12em; text-transform: uppercase; }
+    .member-always {
+      position: absolute;
+      bottom: 1rem; left: 1.25rem;
+    }
+
+    /* SHOWS */
+    .shows-teaser { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .show-item {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      padding: 1.25rem;
+      background: var(--gray-dark);
+      border: 1px solid rgba(245,240,232,0.06);
+      border-left: 3px solid var(--red);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .show-item:hover { border-color: var(--cyan); transform: translateX(4px); }
+    .show-date { text-align: center; min-width: 52px; }
+    .show-date .day { font-family: var(--font-display); font-size: 2.2rem; line-height: 1; color: var(--red); }
+    .show-date .month { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,232,0.5); }
+    .show-venue { font-weight: 600; font-size: 0.95rem; }
+    .show-city { font-size: 0.8rem; color: rgba(245,240,232,0.5); margin-top: 0.2rem; }
+    .show-type { margin-top: 0.5rem; }
+
+    /* CTA BAND */
+    .cta-band {
+      background: var(--red);
+      padding: 5rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: 'LIXINHO';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: 18vw;
+      color: rgba(245,240,232,0.06);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .cta-band h2 { margin-bottom: 1rem; position: relative; }
+    .cta-band p { color: rgba(245,240,232,0.8); margin-bottom: 2rem; position: relative; }
+    .cta-band .btn-outline { border-color: rgba(245,240,232,0.6); position: relative; }
+
+    @media (max-width: 768px) {
+      .about-split { grid-template-columns: 1fr; gap: 3rem; }
+      .about-img-accent { display: none; }
+      .members { grid-template-columns: 1fr 1fr; }
+      .shows-teaser { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .members { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav" role="navigation" aria-label="Menu principal">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html" aria-label="Lixinho Tropical – início">
+      <img src="assets/img/logo.png" alt="Lixinho Tropical">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="pages/sobre.html">A Banda</a></li>
+      <li><a href="pages/show.html">O Show</a></li>
+      <li><a href="pages/agenda.html">Agenda</a></li>
+      <li><a href="pages/fotos.html">Fotos</a></li>
+      <li><a href="pages/videos.html">Vídeos</a></li>
+      <li><a href="pages/clipping.html">Clipping</a></li>
+      <li><a href="pages/loja.html">Loja</a></li>
+      <li><a href="pages/musicas.html">Músicas</a></li>
+      <li><a href="pages/contato.html" class="btn btn-red nav-cta">Contato</a></li>
+    </ul>
+    <button id="hamburger" class="hamburger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div id="mobile-nav" class="nav-mobile" role="dialog" aria-label="Menu mobile">
+  <a href="index.html">Início</a>
+  <a href="pages/sobre.html">A Banda</a>
+  <a href="pages/show.html">O Show</a>
+  <a href="pages/agenda.html">Agenda</a>
+  <a href="pages/fotos.html">Fotos</a>
+  <a href="pages/videos.html">Vídeos</a>
+  <a href="pages/clipping.html">Clipping</a>
+  <a href="pages/loja.html">Loja</a>
+  <a href="pages/musicas.html">Músicas</a>
+  <a href="pages/contato.html">Contato</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" aria-label="Apresentação">
+  <div class="hero-bg">
+    <div class="hero-bg-img" role="img" aria-label="Lixinho Tropical em show"></div>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="container hero-content">
+    <p class="hero-eyebrow" data-reveal>Música Safada Brasileira · São Paulo, SP</p>
+    <h1 class="hero-title glitch" data-text="LIXINHO TROPICAL" data-reveal>
+      <span class="line-red">LIXINHO</span>
+      <span class="line-cyan">Tropical</span>
+    </h1>
+    <p class="hero-sub" data-reveal>
+      Do encontro entre culinária e música nasce uma narrativa sonora entre o litoral e o concreto, o popular e o pop, o íntimo e o urbano.
+    </p>
+    <div class="hero-actions" data-reveal>
+      <a href="pages/show.html" class="btn btn-red">Ver o Show</a>
+      <a href="pages/agenda.html" class="btn btn-outline">Próximas Datas</a>
+    </div>
+  </div>
+  <span class="hero-scroll" aria-hidden="true">Role</span>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">Lixinho Tropical</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item">Música Safada Brasileira</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item">Forró · Ijexá · Funk · Piseiro · Cumbia</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item">São Paulo – SP</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item">Usa-me · Oxe · Me Faz um PIX · Sul Tropical</span>
+    <span class="ticker-sep">✦</span>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section class="section" aria-label="Sobre a banda">
+  <div class="container">
+    <div class="about-split">
+      <div class="about-img-wrap" data-reveal>
+        <img class="about-img-main" src="assets/img/banda-01.jpg" alt="Lixinho Tropical — foto de divulgação" loading="lazy">
+        <img class="about-img-accent" src="assets/img/banda-02.jpg" alt="Detalhe do show" loading="lazy">
+      </div>
+      <div class="about-text">
+        <p class="section-label" data-reveal>A Banda</p>
+        <h2 data-reveal>Culinária<br><span class="text-red">&amp; Música</span></h2>
+        <p data-reveal>
+          A Lixinho Tropical nasce do encontro entre culinária e música, idealizada por Ivy Almeida no projeto <strong>SURURU LOVER'S</strong>. Uma formação multicultural que une Aracaju (SE) e Campo Limpo Paulista (SP), radicada na capital paulista há mais de uma década.
+        </p>
+        <p data-reveal>
+          Uma narrativa sonora que tensiona as experiências entre o litoral e o concreto, o popular e o pop, o íntimo e o urbano.
+        </p>
+        <div class="ritmos" data-reveal>
+          <span class="tag tag-red">Forró</span>
+          <span class="tag tag-red">Ijexá</span>
+          <span class="tag tag-red">Funk</span>
+          <span class="tag tag-red">Piseiro</span>
+          <span class="tag tag-red">Cumbia</span>
+          <span class="tag tag-red">Pop</span>
+        </div>
+        <a href="pages/sobre.html" class="btn btn-outline" data-reveal>Conhecer a banda →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBROS -->
+<section class="section" style="padding-top:0" aria-label="Integrantes">
+  <div class="container">
+    <p class="section-label" data-reveal>Integrantes</p>
+    <h2 class="mb-4" data-reveal>Quem é a<br><span class="text-cyan">Lixinho Tropical</span></h2>
+    <div class="members">
+      <div class="member-card" data-reveal>
+        <img src="assets/img/deborah.jpg" alt="Déborah Costa — vocal e compositora" loading="lazy">
+        <div class="member-always">
+          <p class="member-name" style="color:var(--white)">Déborah</p>
+        </div>
+        <div class="member-info">
+          <p class="member-role">Vocal · Compositora · Musa Fundadora</p>
+          <p class="member-name">Déborah Costa</p>
+        </div>
+      </div>
+      <div class="member-card" data-reveal>
+        <img src="assets/img/aragao.jpg" alt="Edézio Aragão — guitarra e bandolim" loading="lazy">
+        <div class="member-always">
+          <p class="member-name" style="color:var(--white)">Aragão</p>
+        </div>
+        <div class="member-info">
+          <p class="member-role">Guitarra · Bandolim · Sound Designer</p>
+          <p class="member-name">Edézio 'Aragão'</p>
+        </div>
+      </div>
+      <div class="member-card" data-reveal>
+        <img src="assets/img/magrao.jpg" alt="Filipe Magrão — baixo e synth" loading="lazy">
+        <div class="member-always">
+          <p class="member-name" style="color:var(--white)">Magrão</p>
+        </div>
+        <div class="member-info">
+          <p class="member-role">Guitarra · Baixo · Synth</p>
+          <p class="member-name">Filipe 'Magrão'</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWS -->
+<section class="section" style="background:var(--gray-dark)" aria-label="Próximos shows">
+  <div class="container">
+    <div class="flex justify-between items-center mb-4 wrap gap-2">
+      <div>
+        <p class="section-label" data-reveal>Agenda</p>
+        <h2 data-reveal>Próximos<br><span class="text-red">Shows</span></h2>
+      </div>
+      <a href="pages/agenda.html" class="btn btn-outline" data-reveal>Ver agenda completa →</a>
+    </div>
+    <div class="shows-teaser">
+      <div class="show-item" data-reveal>
+        <div class="show-date">
+          <div class="day">28</div>
+          <div class="month">Jun</div>
+        </div>
+        <div>
+          <div class="show-venue">Casa de Francisca</div>
+          <div class="show-city">São Paulo, SP</div>
+          <div class="show-type"><span class="tag tag-red">Show</span></div>
+        </div>
+      </div>
+      <div class="show-item" data-reveal>
+        <div class="show-date">
+          <div class="day">12</div>
+          <div class="month">Jul</div>
+        </div>
+        <div>
+          <div class="show-venue">Baiúca</div>
+          <div class="show-city">São Paulo, SP</div>
+          <div class="show-type"><span class="tag tag-cyan">Especial</span></div>
+        </div>
+      </div>
+      <div class="show-item" data-reveal>
+        <div class="show-date">
+          <div class="day">19</div>
+          <div class="month">Jul</div>
+        </div>
+        <div>
+          <div class="show-venue">Picles Bar</div>
+          <div class="show-city">São Paulo, SP</div>
+          <div class="show-type"><span class="tag tag-red">Show</span></div>
+        </div>
+      </div>
+      <div class="show-item" data-reveal>
+        <div class="show-date">
+          <div class="day">02</div>
+          <div class="month">Ago</div>
+        </div>
+        <div>
+          <div class="show-venue">Ocupação Fervo</div>
+          <div class="show-city">São Paulo, SP</div>
+          <div class="show-type"><span class="tag tag-red">Show</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band" aria-label="Chamada para contato">
+  <div class="container" style="position:relative;z-index:1">
+    <p class="section-label" style="justify-content:center;color:rgba(245,240,232,0.6)" data-reveal>Booking & Contratações</p>
+    <h2 data-reveal>Bora<br>Tocar!</h2>
+    <p data-reveal>Agende um show, evento ou residência artística.</p>
+    <div class="flex gap-2" style="justify-content:center;flex-wrap:wrap" data-reveal>
+      <a href="pages/contato.html" class="btn btn-outline">Falar com a gente →</a>
+      <a href="https://wa.me/5511984214384" class="btn" style="background:rgba(245,240,232,0.15);color:var(--white)" target="_blank" rel="noopener">WhatsApp direto</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/img/logo.png" alt="Lixinho Tropical">
+        <p class="footer-tagline">Música Safada Brasileira<br>São Paulo – SP</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/lixinhotropical/" class="social-link social-ig" aria-label="Instagram" target="_blank" rel="noopener"><span data-social-icon="instagram"></span></a><a href="https://open.spotify.com/intl-pt/artist/3noX4LW5rgdaEjRDBNDcei?si=TKRuq_6HRUKj_NIrK3AUfQ" class="social-link social-sp" aria-label="Spotify" target="_blank" rel="noopener"><span data-social-icon="spotify"></span></a><a href="https://soundcloud.com/lixinho-tropical" class="social-link social-sc" aria-label="SoundCloud" target="_blank" rel="noopener"><span data-social-icon="soundcloud"></span></a><a href="https://www.youtube.com/@lixinhotropical" class="social-link social-yt" aria-label="YouTube" target="_blank" rel="noopener"><span data-social-icon="youtube"></span></a><a href="https://www.tiktok.com/@lixinhotropical" class="social-link social-tt" aria-label="TikTok" target="_blank" rel="noopener"><span data-social-icon="tiktok"></span></a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Navegação</p>
+        <ul class="footer-col-links">
+          <li><a href="pages/sobre.html">A Banda</a></li>
+          <li><a href="pages/show.html">O Show</a></li>
+          <li><a href="pages/fotos.html">Fotos</a></li>
+          <li><a href="pages/videos.html">Vídeos</a></li>
+          <li><a href="pages/clipping.html">Clipping</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Mais</p>
+        <ul class="footer-col-links">
+          <li><a href="pages/agenda.html">Agenda de Shows</a></li>
+          <li><a href="pages/loja.html">Lojinha</a></li>
+          <li><a href="pages/musicas.html">Download de Músicas</a></li>
+          <li><a href="pages/contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contato</p>
+        <ul class="footer-col-links">
+          <li><a href="mailto:lixinhotropical@gmail.com">lixinhotropical@gmail.com</a></li>
+          <li><a href="https://wa.me/5511984214384" target="_blank" rel="noopener">(11) 98421-4384</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Lixinho Tropical. Todos os direitos reservados.</p>
+      <nav class="footer-legal" aria-label="Links legais">
+        <a href="pages/cookies.html">Política de Cookies</a>
+        <a href="pages/termos.html">Termos de Uso</a>
+        <a href="pages/suporte.html">Ajuda & Suporte</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" role="dialog" aria-label="Aviso de cookies" style="display:none;">
+  <p>Usamos cookies para melhorar sua experiência. <a href="pages/cookies.html">Saiba mais</a>.</p>
+  <div class="cookie-actions">
+    <button id="cookie-accept">Aceitar</button>
+    <button id="cookie-decline">Recusar</button>
+  </div>
+</div>
+
+<script src="js/global.js"></script>
+<script src="js/social-icons.js"></script>
+</body>
+</html>
