@@ -1,135 +1,277 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Lojinha da Lixinho Tropical — souvenirs e merch oficial.">
   <title>Lojinha — Lixinho Tropical</title>
   <link rel="stylesheet" href="../css/global.css">
   <style>
-    .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
-    .product-card { background: var(--gray-dark); border: 1px solid rgba(245,240,232,0.06); overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
-    .product-card:hover { border-color: rgba(232,0,28,0.3); transform: translateY(-4px); }
-    .product-img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gray-mid); }
-    .product-img-placeholder { width: 100%; aspect-ratio: 1; background: var(--gray-mid); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
-    .product-body { padding: 1.25rem; }
-    .product-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.35rem; }
-    .product-desc { font-size: 0.8rem; color: rgba(245,240,232,0.5); margin-bottom: 1rem; }
-    .product-footer { display: flex; justify-content: space-between; align-items: center; }
-    .product-price { font-family: var(--font-display); font-size: 1.4rem; color: var(--red); }
-    .product-btn { padding: 0.5rem 1rem; font-size: 0.75rem; letter-spacing: 0.08em; }
-    .cart-notice { background: var(--gray-dark); border: 1px solid rgba(0,200,232,0.2); padding: 1rem 1.5rem; margin-bottom: 2rem; font-size: 0.85rem; color: rgba(245,240,232,0.65); }
-    .cart-notice a { color: var(--cyan); }
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--gray-dark);
+      border: 1px solid rgba(245, 240, 232, 0.06);
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .product-card:hover {
+      border-color: rgba(232, 0, 28, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      background: var(--gray-mid);
+    }
+
+    .product-img-placeholder {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--gray-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .product-body {
+      padding: 1.25rem;
+    }
+
+    .product-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .product-desc {
+      font-size: 0.8rem;
+      color: rgba(245, 240, 232, 0.5);
+      margin-bottom: 1rem;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .product-price {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--red);
+    }
+
+    .product-btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+    }
+
+    .cart-notice {
+      background: var(--gray-dark);
+      border: 1px solid rgba(0, 200, 232, 0.2);
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      color: rgba(245, 240, 232, 0.65);
+    }
+
+    .cart-notice a {
+      color: var(--cyan);
+    }
   </style>
 </head>
+
 <body>
-<nav id="nav" role="navigation" aria-label="Menu principal">
-  <div class="nav-inner">
-    <a class="nav-logo" href="../index.html"><img src="../assets/img/logo.png" alt="Lixinho Tropical"></a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Início</a></li><li><a href="sobre.html">A Banda</a></li>
-      <li><a href="show.html">O Show</a></li><li><a href="agenda.html">Agenda</a></li>
-      <li><a href="fotos.html">Fotos</a></li><li><a href="videos.html">Vídeos</a></li>
-      <li><a href="clipping.html">Clipping</a></li><li><a href="loja.html">Loja</a></li>
-      <li><a href="musicas.html">Músicas</a></li>
-      <li><a href="contato.html" class="btn btn-red nav-cta">Contato</a></li>
-    </ul>
-    <button id="hamburger" class="hamburger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-<div id="mobile-nav" class="nav-mobile">
-  <a href="../index.html">Início</a><a href="sobre.html">A Banda</a><a href="show.html">O Show</a>
-  <a href="agenda.html">Agenda</a><a href="fotos.html">Fotos</a><a href="videos.html">Vídeos</a>
-  <a href="clipping.html">Clipping</a><a href="loja.html">Loja</a><a href="musicas.html">Músicas</a><a href="contato.html">Contato</a>
-</div>
-
-<header class="page-hero" data-title="LOJA">
-  <div class="container">
-    <p class="section-label" data-reveal>Merch Oficial</p>
-    <h1 data-reveal><span class="text-red">Lojinha</span></h1>
-    <p class="mt-3" style="max-width:480px;color:rgba(245,240,232,0.65)" data-reveal>Souvenirs e merch oficial da Lixinho Tropical. Leve um pedaço do baile pra casa.</p>
-  </div>
-</header>
-<div class="ticker-wrap" aria-hidden="true"><div class="ticker-track"><span class="ticker-item">Loja Oficial</span><span class="ticker-sep">✦</span><span class="ticker-item">Merch Lixinho Tropical</span><span class="ticker-sep">✦</span><span class="ticker-item">Souvenirs</span><span class="ticker-sep">✦</span></div></div>
-
-<section class="section">
-  <div class="container">
-    <div class="cart-notice" data-reveal>
-      🛒 Para comprar, <a href="contato.html">entre em contato</a> ou nos chame no <a href="https://wa.me/5511984214384" target="_blank" rel="noopener">WhatsApp</a>. Vendas também disponíveis nos shows!
+  <nav id="nav" role="navigation" aria-label="Menu principal">
+    <div class="nav-inner">
+      <a class="nav-logo" href="../index.html"><img src="../assets/img/logo.png" alt="Lixinho Tropical"></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Início</a></li>
+        <li><a href="sobre.html">A Banda</a></li>
+        <li><a href="show.html">O Show</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="fotos.html">Fotos</a></li>
+        <li><a href="videos.html">Vídeos</a></li>
+        <li><a href="clipping.html">Clipping</a></li>
+        <li><a href="loja.html">Loja</a></li>
+        <li><a href="musicas.html">Músicas</a></li>
+        <li><a href="contato.html" class="btn btn-red nav-cta">Contato</a></li>
+      </ul>
+      <button id="hamburger" class="hamburger" aria-label="Abrir menu"
+        aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
-    <div class="shop-grid">
-      <div class="product-card" data-reveal>
-        <div class="product-img-placeholder">👕</div>
-        <div class="product-body">
-          <div class="product-name">Camiseta — Lixinho Tropical</div>
-          <div class="product-desc">100% algodão. Estampa com o logo oficial. Tamanhos P ao GG.</div>
-          <div class="product-footer">
-            <span class="product-price">R$ 60</span>
-            <a href="https://wa.me/5511984214384" class="btn btn-red product-btn" target="_blank" rel="noopener">Comprar</a>
+  </nav>
+  <div id="mobile-nav" class="nav-mobile">
+    <a href="../index.html">Início</a><a href="sobre.html">A Banda</a><a href="show.html">O Show</a>
+    <a href="agenda.html">Agenda</a><a href="fotos.html">Fotos</a><a href="videos.html">Vídeos</a>
+    <a href="clipping.html">Clipping</a><a href="loja.html">Loja</a><a href="musicas.html">Músicas</a><a
+      href="contato.html">Contato</a>
+  </div>
+
+  <header class="page-hero" data-title="LOJA">
+    <div class="container">
+      <p class="section-label" data-reveal>Merch Oficial</p>
+      <h1 data-reveal><span class="text-red">Lojinha</span></h1>
+      <p class="mt-3" style="max-width:480px;color:rgba(245,240,232,0.65)" data-reveal>Souvenirs e merch oficial da
+        Lixinho Tropical. Leve um pedaço do baile pra casa.</p>
+    </div>
+  </header>
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track"><span class="ticker-item">Loja Oficial</span><span class="ticker-sep">✦</span><span
+        class="ticker-item">Merch Lixinho Tropical</span><span class="ticker-sep">✦</span><span
+        class="ticker-item">Souvenirs</span><span class="ticker-sep">✦</span></div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="cart-notice" data-reveal>
+        🛒 Para comprar, <a href="contato.html">entre em contato</a> ou nos chame no <a
+          href="https://wa.me/5511984214384" target="_blank" rel="noopener">WhatsApp</a>. Vendas também disponíveis nos
+        shows!
+      </div>
+      <div class="shop-grid">
+        <div class="product-card" data-reveal>
+          <div src="assets/img/camiseta_lt.png" class="product-img-placeholder"></div>
+          <div class="product-body">
+            <div class="product-name">Camiseta — Lixinho Tropical</div>
+            <div class="product-desc">100% algodão. Estampa com o logo oficial. Tamanhos P ao GG.</div>
+            <div class="product-footer">
+              <span class="product-price">R$ 60</span>
+              <a href="https://wa.me/5511984214384" class="btn btn-red product-btn" target="_blank"
+                rel="noopener">Comprar</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="product-card" data-reveal>
-        <div class="product-img-placeholder">🧢</div>
-        <div class="product-body">
-          <div class="product-name">Boné — Música Safada</div>
-          <div class="product-desc">Bordado com o slogan da banda. Ajustável. Edição limitada.</div>
-          <div class="product-footer">
-            <span class="product-price">R$ 50</span>
-            <a href="https://wa.me/5511984214384" class="btn btn-red product-btn" target="_blank" rel="noopener">Comprar</a>
+        <div class="product-card" data-reveal>
+          <div class="product-img-placeholder">🧢</div>
+          <div class="product-body">
+            <div class="product-name">Boné — Música Safada</div>
+            <div class="product-desc">Bordado com o slogan da banda. Ajustável. Edição limitada.</div>
+            <div class="product-footer">
+              <span class="product-price">R$ 50</span>
+              <a href="https://wa.me/5511984214384" class="btn btn-red product-btn" target="_blank"
+                rel="noopener">Comprar</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="product-card" data-reveal>
-        <div class="product-img-placeholder">💿</div>
-        <div class="product-body">
-          <div class="product-name">Disco — Edição Especial</div>
-          <div class="product-desc">Vinil ou CD com as músicas autorais. Autografado pelos integrantes.</div>
-          <div class="product-footer">
-            <span class="product-price">R$ 80</span>
-            <a href="https://wa.me/5511984214384" class="btn btn-red product-btn" target="_blank" rel="noopener">Comprar</a>
+        <div class="product-card" data-reveal>
+          <div class="product-img-placeholder">💿</div>
+          <div class="product-body">
+            <div class="product-name">Disco — Edição Especial</div>
+            <div class="product-desc">Vinil ou CD com as músicas autorais. Autografado pelos integrantes.</div>
+            <div class="product-footer">
+              <span class="product-price">R$ 80</span>
+              <a href="https://wa.me/5511984214384" class="btn btn-red product-btn" target="_blank"
+                rel="noopener">Comprar</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="product-card" data-reveal>
-        <div class="product-img-placeholder">🧣</div>
-        <div class="product-body">
-          <div class="product-name">Bandana — Lixinho</div>
-          <div class="product-desc">Bandana estampada com a identidade visual da banda. Tamanho único.</div>
-          <div class="product-footer">
-            <span class="product-price">R$ 30</span>
-            <a href="https://wa.me/5511984214384" class="btn btn-red product-btn" target="_blank" rel="noopener">Comprar</a>
+        <div class="product-card" data-reveal>
+          <div class="product-img-placeholder">🧣</div>
+          <div class="product-body">
+            <div class="product-name">Bandana — Lixinho</div>
+            <div class="product-desc">Bandana estampada com a identidade visual da banda. Tamanho único.</div>
+            <div class="product-footer">
+              <span class="product-price">R$ 30</span>
+              <a href="https://wa.me/5511984214384" class="btn btn-red product-btn" target="_blank"
+                rel="noopener">Comprar</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="product-card" data-reveal>
-        <div class="product-img-placeholder">🖼️</div>
-        <div class="product-body">
-          <div class="product-name">Poster A3 — Foto Oficial</div>
-          <div class="product-desc">Impressão em papel fotográfico. Foto oficial por Kehl Cabral. Assinado.</div>
-          <div class="product-footer">
-            <span class="product-price">R$ 40</span>
-            <a href="https://wa.me/5511984214384" class="btn btn-red product-btn" target="_blank" rel="noopener">Comprar</a>
+        <div class="product-card" data-reveal>
+          <div class="product-img-placeholder">🖼️</div>
+          <div class="product-body">
+            <div class="product-name">Poster A3 — Foto Oficial</div>
+            <div class="product-desc">Impressão em papel fotográfico. Foto oficial por Kehl Cabral. Assinado.</div>
+            <div class="product-footer">
+              <span class="product-price">R$ 40</span>
+              <a href="https://wa.me/5511984214384" class="btn btn-red product-btn" target="_blank"
+                rel="noopener">Comprar</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="product-card" data-reveal>
-        <div class="product-img-placeholder">📦</div>
-        <div class="product-body">
-          <div class="product-name">Kit Lixinho Tropical</div>
-          <div class="product-desc">Camiseta + Bandana + Poster. Kit completo com embalagem especial.</div>
-          <div class="product-footer">
-            <span class="product-price">R$ 110</span>
-            <a href="https://wa.me/5511984214384" class="btn btn-cyan product-btn" target="_blank" rel="noopener">Comprar</a>
+        <div class="product-card" data-reveal>
+          <div class="product-img-placeholder">📦</div>
+          <div class="product-body">
+            <div class="product-name">Kit Lixinho Tropical</div>
+            <div class="product-desc">Camiseta + Bandana + Poster. Kit completo com embalagem especial.</div>
+            <div class="product-footer">
+              <span class="product-price">R$ 110</span>
+              <a href="https://wa.me/5511984214384" class="btn btn-cyan product-btn" target="_blank"
+                rel="noopener">Comprar</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer><div class="container"><div class="footer-inner"><div class="footer-brand"><img src="../assets/img/logo.png" alt="Lixinho Tropical"><p class="footer-tagline">Música Safada Brasileira<br>São Paulo – SP</p><div class="footer-socials"><a href="https://www.instagram.com/lixinhotropical/" class="social-link social-ig" aria-label="Instagram" target="_blank" rel="noopener"><span data-social-icon="instagram"></span></a><a href="https://open.spotify.com/intl-pt/artist/3noX4LW5rgdaEjRDBNDcei?si=TKRuq_6HRUKj_NIrK3AUfQ" class="social-link social-sp" aria-label="Spotify" target="_blank" rel="noopener"><span data-social-icon="spotify"></span></a><a href="https://soundcloud.com/lixinho-tropical" class="social-link social-sc" aria-label="SoundCloud" target="_blank" rel="noopener"><span data-social-icon="soundcloud"></span></a><a href="https://www.youtube.com/@lixinhotropical" class="social-link social-yt" aria-label="YouTube" target="_blank" rel="noopener"><span data-social-icon="youtube"></span></a><a href="https://www.tiktok.com/@lixinhotropical" class="social-link social-tt" aria-label="TikTok" target="_blank" rel="noopener"><span data-social-icon="tiktok"></span></a></div></div><div><p class="footer-col-title">Navegação</p><ul class="footer-col-links"><li><a href="../index.html">Início</a></li><li><a href="sobre.html">A Banda</a></li><li><a href="agenda.html">Agenda</a></li><li><a href="fotos.html">Fotos</a></li></ul></div><div><p class="footer-col-title">Mais</p><ul class="footer-col-links"><li><a href="musicas.html">Músicas</a></li><li><a href="contato.html">Contato</a></li></ul></div><div><p class="footer-col-title">Contato</p><ul class="footer-col-links"><li><a href="mailto:lixinhotropical@gmail.com">lixinhotropical@gmail.com</a></li><li><a href="https://wa.me/5511984214384" target="_blank">(11) 98421-4384</a></li></ul></div></div><div class="footer-bottom"><p class="footer-copy">© 2025 Lixinho Tropical.</p><nav class="footer-legal"><a href="cookies.html">Cookies</a><a href="termos.html">Termos</a><a href="suporte.html">Suporte</a></nav></div></div></footer>
-<div id="cookie-banner" role="dialog" style="display:none;"><p>Usamos cookies. <a href="cookies.html">Saiba mais</a>.</p><div class="cookie-actions"><button id="cookie-accept">Aceitar</button><button id="cookie-decline">Recusar</button></div></div>
-<script src="../js/global.js"></script>
-<script src="../js/social-icons.js"></script>
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand"><img src="../assets/img/logo.png" alt="Lixinho Tropical">
+          <p class="footer-tagline">Música Safada Brasileira<br>São Paulo – SP</p>
+          <div class="footer-socials"><a href="https://www.instagram.com/lixinhotropical/" class="social-link social-ig"
+              aria-label="Instagram" target="_blank" rel="noopener"><span data-social-icon="instagram"></span></a><a
+              href="https://open.spotify.com/intl-pt/artist/3noX4LW5rgdaEjRDBNDcei?si=TKRuq_6HRUKj_NIrK3AUfQ"
+              class="social-link social-sp" aria-label="Spotify" target="_blank" rel="noopener"><span
+                data-social-icon="spotify"></span></a><a href="https://soundcloud.com/lixinho-tropical"
+              class="social-link social-sc" aria-label="SoundCloud" target="_blank" rel="noopener"><span
+                data-social-icon="soundcloud"></span></a><a href="https://www.youtube.com/@lixinhotropical"
+              class="social-link social-yt" aria-label="YouTube" target="_blank" rel="noopener"><span
+                data-social-icon="youtube"></span></a><a href="https://www.tiktok.com/@lixinhotropical"
+              class="social-link social-tt" aria-label="TikTok" target="_blank" rel="noopener"><span
+                data-social-icon="tiktok"></span></a></div>
+        </div>
+        <div>
+          <p class="footer-col-title">Navegação</p>
+          <ul class="footer-col-links">
+            <li><a href="../index.html">Início</a></li>
+            <li><a href="sobre.html">A Banda</a></li>
+            <li><a href="agenda.html">Agenda</a></li>
+            <li><a href="fotos.html">Fotos</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Mais</p>
+          <ul class="footer-col-links">
+            <li><a href="musicas.html">Músicas</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Contato</p>
+          <ul class="footer-col-links">
+            <li><a href="mailto:lixinhotropical@gmail.com">lixinhotropical@gmail.com</a></li>
+            <li><a href="https://wa.me/5511984214384" target="_blank">(11) 98421-4384</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Lixinho Tropical.</p>
+        <nav class="footer-legal"><a href="cookies.html">Cookies</a><a href="termos.html">Termos</a><a
+            href="suporte.html">Suporte</a></nav>
+      </div>
+    </div>
+  </footer>
+  <div id="cookie-banner" role="dialog" style="display:none;">
+    <p>Usamos cookies. <a href="cookies.html">Saiba mais</a>.</p>
+    <div class="cookie-actions"><button id="cookie-accept">Aceitar</button><button id="cookie-decline">Recusar</button>
+    </div>
+  </div>
+  <script src="../js/global.js"></script>
+  <script src="../js/social-icons.js"></script>
 </body>
+
 </html>
