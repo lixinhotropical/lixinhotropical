@@ -1,35 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Galeria de fotos da Lixinho Tropical — fotos dos integrantes e de show.">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Galeria de fotos da Lixinho Tropical — álbuns de shows e ensaios.">
   <title>Fotos — Lixinho Tropical</title>
   <link rel="stylesheet" href="../css/global.css">
   <style>
-    .filter-bar {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-bottom: 2.5rem;
+    /* ÁLBUNS — GRID DE CAPAS */
+    .albums-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
     }
-    .filter-btn {
-      padding: 0.5rem 1.25rem;
-      font-size: 0.75rem;
-      font-weight: 600;
+    .album-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid rgba(245,240,232,0.06);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .album-card:hover { border-color: rgba(232,0,28,0.4); transform: translateY(-4px); }
+    .album-cover {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s, opacity 0.3s;
+      opacity: 0.8;
+    }
+    .album-card:hover .album-cover { transform: scale(1.04); opacity: 1; }
+    .album-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.2) 60%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.25rem;
+    }
+    .album-name { font-family: var(--font-display); font-size: 1.4rem; line-height: 1.1; color: var(--white); }
+    .album-date { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-top: 0.3rem; }
+    .album-count { font-size: 0.75rem; color: rgba(245,240,232,0.45); margin-top: 0.2rem; }
+
+    /* VISUALIZADOR DE ÁLBUM */
+    #album-view { display: none; }
+    #album-view.open { display: block; }
+
+    .album-view-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(245,240,232,0.08);
+    }
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      border: 1px solid rgba(245,240,232,0.15);
       color: rgba(245,240,232,0.5);
-      border-radius: 2px;
-      transition: all 0.2s;
+      cursor: pointer;
+      transition: color 0.2s;
       background: none;
+      border: none;
+      padding: 0;
+      font-family: var(--font-body);
     }
-    .filter-btn.active, .filter-btn:hover {
-      border-color: var(--red);
-      color: var(--white);
-      background: rgba(232,0,28,0.1);
-    }
+    .back-btn:hover { color: var(--white); }
+    .back-btn::before { content: '←'; font-size: 1.1rem; }
+    .album-view-title { font-family: var(--font-display); font-size: 2.5rem; color: var(--white); line-height: 1; }
+    .album-view-date { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-top: 0.25rem; }
 
     .photo-masonry {
       columns: 3;
@@ -48,26 +91,32 @@
       transition: transform 0.4s, opacity 0.3s;
       opacity: 0.85;
     }
-    .photo-item:hover img { transform: scale(1.04); opacity: 1; }
+    .photo-item:hover img { transform: scale(1.03); opacity: 1; }
     .photo-item-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(8,8,8,0.4);
-      display: flex;
-      align-items: flex-end;
-      padding: 1rem;
+      background: rgba(8,8,8,0.3);
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .photo-item:hover .photo-item-overlay { opacity: 1; }
-    .photo-item-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); }
+    .photo-zoom-icon { font-size: 1.5rem; color: var(--white); }
+
+    .empty-album {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: rgba(245,240,232,0.3);
+    }
+    .empty-album p { font-size: 0.9rem; margin-top: 0.75rem; }
 
     @media (max-width: 900px) { .photo-masonry { columns: 2; } }
-    @media (max-width: 480px) { .photo-masonry { columns: 1; } }
+    @media (max-width: 480px) { .photo-masonry { columns: 1; } .albums-grid { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
-
 <nav id="nav" role="navigation" aria-label="Menu principal">
   <div class="nav-inner">
     <a class="nav-logo" href="../index.html"><img src="../assets/img/logo.png" alt="Lixinho Tropical"></a>
@@ -92,105 +141,39 @@
   <div class="container">
     <p class="section-label" data-reveal>Galeria</p>
     <h1 data-reveal><span class="text-red">Fotos</span></h1>
-    <p class="mt-3" style="max-width:480px;color:rgba(245,240,232,0.65)" data-reveal>Clique em qualquer foto para ampliar.</p>
+    <p class="mt-3" style="max-width:480px;color:rgba(245,240,232,0.65)" data-reveal>Escolha um álbum para ver as fotos.</p>
   </div>
 </header>
+<div class="ticker-wrap" aria-hidden="true"><div class="ticker-track"><span class="ticker-item">Lixinho Tropical</span><span class="ticker-sep">✦</span><span class="ticker-item">Foto: Kehl Cabral Fotografia</span><span class="ticker-sep">✦</span><span class="ticker-item">São Paulo – SP</span><span class="ticker-sep">✦</span></div></div>
 
-<div class="ticker-wrap" aria-hidden="true">
-  <div class="ticker-track">
-    <span class="ticker-item">Lixinho Tropical</span><span class="ticker-sep">✦</span>
-    <span class="ticker-item">Foto: Kehl Cabral Fotografia</span><span class="ticker-sep">✦</span>
-    <span class="ticker-item">São Paulo – SP</span><span class="ticker-sep">✦</span>
-  </div>
-</div>
-
-<section class="section" aria-label="Galeria de fotos">
+<section class="section">
   <div class="container">
 
-    <div class="filter-bar" role="group" aria-label="Filtrar fotos">
-      <button class="filter-btn active" data-filter="all">Todas</button>
-      <button class="filter-btn" data-filter="divulgacao">Divulgação</button>
-      <button class="filter-btn" data-filter="show">Show</button>
-      <button class="filter-btn" data-filter="bastidores">Bastidores</button>
-      <button class="filter-btn" data-filter="integrantes">Integrantes</button>
+    <!-- GRID DE ÁLBUNS -->
+    <div id="albums-grid" class="albums-grid"></div>
+
+    <!-- VISUALIZADOR DE ÁLBUM -->
+    <div id="album-view">
+      <div class="album-view-header">
+        <button class="back-btn" id="back-btn">Voltar aos álbuns</button>
+        <div>
+          <div class="album-view-title" id="album-view-title"></div>
+          <div class="album-view-date" id="album-view-date"></div>
+        </div>
+      </div>
+      <div class="photo-masonry" id="album-photos"></div>
     </div>
 
-    <div class="photo-masonry" id="gallery">
-
-      <!-- DIVULGAÇÃO -->
-      <div class="photo-item" data-cat="divulgacao" data-reveal>
-        <img src="../assets/img/foto-trio-01.jpg" alt="Lixinho Tropical — divulgação" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Divulgação</span></div>
-      </div>
-      <div class="photo-item" data-cat="divulgacao" data-reveal>
-        <img src="../assets/img/foto-trio-02.jpg" alt="Lixinho Tropical — divulgação outdoor" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Divulgação</span></div>
-      </div>
-      <div class="photo-item" data-cat="divulgacao" data-reveal>
-        <img src="../assets/img/foto-trio-03.jpg" alt="Lixinho Tropical — brinde" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Divulgação</span></div>
-      </div>
-      <div class="photo-item" data-cat="divulgacao" data-reveal>
-        <img src="../assets/img/foto-trio-04.jpg" alt="Lixinho Tropical — chuva de confete" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Divulgação</span></div>
-      </div>
-
-      <!-- INTEGRANTES -->
-      <div class="photo-item" data-cat="integrantes" data-reveal>
-        <img src="../assets/img/deborah-solo.jpg" alt="Déborah Costa" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Déborah Costa</span></div>
-      </div>
-      <div class="photo-item" data-cat="integrantes" data-reveal>
-        <img src="../assets/img/deborah-solo-02.jpg" alt="Déborah Costa" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Déborah Costa</span></div>
-      </div>
-      <div class="photo-item" data-cat="integrantes" data-reveal>
-        <img src="../assets/img/deborah-solo-03.jpg" alt="Déborah Costa — perfil" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Déborah Costa</span></div>
-      </div>
-      <div class="photo-item" data-cat="integrantes" data-reveal>
-        <img src="../assets/img/aragao-solo.jpg" alt="Edézio Aragão" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Aragão</span></div>
-      </div>
-      <div class="photo-item" data-cat="integrantes" data-reveal>
-        <img src="../assets/img/aragao-solo-02.jpg" alt="Edézio Aragão" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Aragão</span></div>
-      </div>
-      <div class="photo-item" data-cat="integrantes" data-reveal>
-        <img src="../assets/img/magrao-solo.jpg" alt="Filipe Magrão" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Magrão</span></div>
-      </div>
-      <div class="photo-item" data-cat="integrantes" data-reveal>
-        <img src="../assets/img/magrao-solo-02.jpg" alt="Filipe Magrão" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Magrão</span></div>
-      </div>
-
-      <!-- BASTIDORES -->
-      <div class="photo-item" data-cat="bastidores" data-reveal>
-        <img src="../assets/img/bastidores-01.jpg" alt="Bastidores — glitter" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Bastidores</span></div>
-      </div>
-      <div class="photo-item" data-cat="bastidores" data-reveal>
-        <img src="../assets/img/bastidores-02.jpg" alt="Bastidores — mesa de frutas" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Bastidores</span></div>
-      </div>
-      <div class="photo-item" data-cat="bastidores" data-reveal>
-        <img src="../assets/img/bastidores-03.jpg" alt="Bastidores — descanso" loading="lazy" data-lightbox>
-        <div class="photo-item-overlay"><span class="photo-item-label">Bastidores</span></div>
-      </div>
-
-    </div>
-
-    <p class="mt-4 text-muted" style="font-size:0.8rem" data-reveal>Créditos fotográficos: Kehl Cabral Fotografia</p>
+    <p class="mt-4 text-muted" style="font-size:0.8rem" id="photo-credit">Créditos fotográficos: Kehl Cabral Fotografia</p>
   </div>
 </section>
 
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div class="footer-brand"><img src="../assets/img/logo.png" alt="Lixinho Tropical"><p class="footer-tagline">Música Safada Brasileira<br>São Paulo – SP</p><div class="footer-socials"><a href="https://www.instagram.com/lixinhotropical/" class="social-link social-ig" aria-label="Instagram" target="_blank" rel="noopener"><span data-social-icon="instagram"></span></a><a href="https://open.spotify.com/intl-pt/artist/3noX4LW5rgdaEjRDBNDcei?si=TKRuq_6HRUKj_NIrK3AUfQ" class="social-link social-sp" aria-label="Spotify" target="_blank" rel="noopener"><span data-social-icon="spotify"></span></a><a href="https://soundcloud.com/lixinho-tropical" class="social-link social-sc" aria-label="SoundCloud" target="_blank" rel="noopener"><span data-social-icon="soundcloud"></span></a><a href="https://www.youtube.com/@lixinhotropical" class="social-link social-yt" aria-label="YouTube" target="_blank" rel="noopener"><span data-social-icon="youtube"></span></a><a href="https://www.tiktok.com/@lixinhotropical" class="social-link social-tt" aria-label="TikTok" target="_blank" rel="noopener"><span data-social-icon="tiktok"></span></a></div></div>
-      <div><p class="footer-col-title">Navegação</p><ul class="footer-col-links"><li><a href="../index.html">Início</a></li><li><a href="sobre.html">A Banda</a></li><li><a href="show.html">O Show</a></li><li><a href="clipping.html">Clipping</a></li></ul></div>
-      <div><p class="footer-col-title">Mais</p><ul class="footer-col-links"><li><a href="agenda.html">Agenda</a></li><li><a href="loja.html">Lojinha</a></li><li><a href="musicas.html">Músicas</a></li><li><a href="contato.html">Contato</a></li></ul></div>
+      <div class="footer-brand"><img src="../assets/img/logo.png" alt="Lixinho Tropical"><p class="footer-tagline">Música Safada Brasileira<br>São Paulo – SP</p><div class="footer-socials"><a href="https://www.instagram.com/lixinhotropical/" class="social-link social-ig" aria-label="Instagram" target="_blank" rel="noopener"><span data-social-icon="instagram"></span></a><a href="https://open.spotify.com/intl-pt/artist/3noX4LW5rgdaEjRDBNDcei" class="social-link social-sp" aria-label="Spotify" target="_blank" rel="noopener"><span data-social-icon="spotify"></span></a><a href="https://soundcloud.com/lixinho-tropical" class="social-link social-sc" aria-label="SoundCloud" target="_blank" rel="noopener"><span data-social-icon="soundcloud"></span></a><a href="https://www.youtube.com/@lixinhotropical" class="social-link social-yt" aria-label="YouTube" target="_blank" rel="noopener"><span data-social-icon="youtube"></span></a><a href="https://www.tiktok.com/@lixinhotropical" class="social-link social-tt" aria-label="TikTok" target="_blank" rel="noopener"><span data-social-icon="tiktok"></span></a></div></div>
+      <div><p class="footer-col-title">Navegação</p><ul class="footer-col-links"><li><a href="../index.html">Início</a></li><li><a href="sobre.html">A Banda</a></li><li><a href="agenda.html">Agenda</a></li><li><a href="clipping.html">Clipping</a></li></ul></div>
+      <div><p class="footer-col-title">Mais</p><ul class="footer-col-links"><li><a href="loja.html">Lojinha</a></li><li><a href="musicas.html">Músicas</a></li><li><a href="contato.html">Contato</a></li></ul></div>
       <div><p class="footer-col-title">Contato</p><ul class="footer-col-links"><li><a href="mailto:lixinhotropical@gmail.com">lixinhotropical@gmail.com</a></li><li><a href="https://wa.me/5511984214384" target="_blank">(11) 98421-4384</a></li></ul></div>
     </div>
     <div class="footer-bottom"><p class="footer-copy">© 2025 Lixinho Tropical.</p><nav class="footer-legal"><a href="cookies.html">Cookies</a><a href="termos.html">Termos</a><a href="suporte.html">Suporte</a></nav></div>
@@ -199,22 +182,179 @@
 <div id="cookie-banner" role="dialog" style="display:none;"><p>Usamos cookies. <a href="cookies.html">Saiba mais</a>.</p><div class="cookie-actions"><button id="cookie-accept">Aceitar</button><button id="cookie-decline">Recusar</button></div></div>
 
 <script src="../js/global.js"></script>
-<script>
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const f = btn.dataset.filter;
-      document.querySelectorAll('.photo-item').forEach(item => {
-        if (f === 'all' || item.dataset.cat === f) {
-          item.style.display = '';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    });
-  });
-</script>
 <script src="../js/social-icons.js"></script>
+<script>
+// ── ÁLBUNS — definição
+// Quando tiver as fotos reais, adicione os arquivos em assets/img/albums/NOME-DO-ALBUM/
+// e liste os nomes dos arquivos no array "photos" de cada álbum.
+const albums = [
+  {
+    id: 'ensaios',
+    name: 'Ensaios',
+    date: 'Divulgação',
+    cover: '../assets/img/foto-trio-01.jpg',
+    photos: [
+      '../assets/img/foto-trio-01.jpg',
+      '../assets/img/foto-trio-02.jpg',
+      '../assets/img/foto-trio-03.jpg',
+      '../assets/img/foto-trio-04.jpg',
+      '../assets/img/deborah-solo.jpg',
+      '../assets/img/deborah-solo-02.jpg',
+      '../assets/img/deborah-solo-03.jpg',
+      '../assets/img/aragao-solo.jpg',
+      '../assets/img/aragao-solo-02.jpg',
+      '../assets/img/magrao-solo.jpg',
+      '../assets/img/magrao-solo-02.jpg',
+      '../assets/img/banda-brinde.jpg',
+      '../assets/img/bastidores-01.jpg',
+      '../assets/img/bastidores-02.jpg',
+      '../assets/img/bastidores-03.jpg',
+    ]
+  },
+  {
+    id: 'arraia',
+    name: 'Arraiá da Lixinho Tropical',
+    date: '',
+    cover: '../assets/img/banda-01.jpg',
+    photos: []
+  },
+  {
+    id: 'sesc-cotoxo',
+    name: 'Sesc Cotoxó',
+    date: '',
+    cover: '../assets/img/show-01.jpg',
+    photos: []
+  },
+  {
+    id: 'picles',
+    name: 'Picles',
+    date: '',
+    cover: '../assets/img/show-02.jpg',
+    photos: []
+  },
+  {
+    id: 'casa-francisca',
+    name: 'Casa de Francisca',
+    date: '',
+    cover: '../assets/img/banda-brinde.jpg',
+    photos: []
+  },
+  {
+    id: 'fervo-nov-2025',
+    name: 'Fervo',
+    date: 'Nov 2025',
+    cover: '../assets/img/bastidores-01.jpg',
+    photos: []
+  },
+  {
+    id: 'ibt-dez-2025',
+    name: 'IBT',
+    date: 'Dez 2025',
+    cover: '../assets/img/bastidores-02.jpg',
+    photos: []
+  },
+  {
+    id: 'fervo-manoel-jan-2026',
+    name: 'Fervo + Manoel Cordeiro',
+    date: 'Jan 2026',
+    cover: '../assets/img/bastidores-03.jpg',
+    photos: []
+  },
+  {
+    id: 'baiuca-fev-2026',
+    name: 'Baiúca',
+    date: 'Fev 2026',
+    cover: '../assets/img/aragao-solo.jpg',
+    photos: []
+  },
+  {
+    id: 'fervo-maio-2026',
+    name: 'Fervo',
+    date: 'Maio 2026',
+    cover: '../assets/img/deborah-solo.jpg',
+    photos: []
+  },
+  {
+    id: 'baiuca-maio-2026',
+    name: 'Baiúca',
+    date: 'Maio 2026',
+    cover: '../assets/img/magrao-solo.jpg',
+    photos: []
+  },
+];
+
+// ── RENDERIZAR GRID DE ÁLBUNS
+const grid = document.getElementById('albums-grid');
+albums.forEach(album => {
+  const count = album.photos.length;
+  const card = document.createElement('div');
+  card.className = 'album-card';
+  card.innerHTML = `
+    <img class="album-cover" src="${album.cover}" alt="${album.name}" loading="lazy">
+    <div class="album-overlay">
+      <div class="album-name">${album.name}</div>
+      ${album.date ? `<div class="album-date">${album.date}</div>` : ''}
+      <div class="album-count">${count > 0 ? count + ' foto' + (count !== 1 ? 's' : '') : 'Em breve'}</div>
+    </div>`;
+  card.addEventListener('click', () => openAlbum(album));
+  grid.appendChild(card);
+});
+
+// ── ABRIR ÁLBUM
+function openAlbum(album) {
+  document.getElementById('albums-grid').style.display = 'none';
+  document.getElementById('album-view').classList.add('open');
+  document.getElementById('album-view-title').textContent = album.name;
+  document.getElementById('album-view-date').textContent = album.date || '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const container = document.getElementById('album-photos');
+  container.innerHTML = '';
+
+  if (album.photos.length === 0) {
+    container.innerHTML = `<div class="empty-album" style="column-span:all">
+      <div style="font-size:3rem">📷</div>
+      <p>As fotos deste álbum chegam em breve.</p>
+    </div>`;
+    return;
+  }
+
+  album.photos.forEach((src, i) => {
+    const item = document.createElement('div');
+    item.className = 'photo-item';
+    item.innerHTML = `
+      <img src="${src}" alt="${album.name} — foto ${i+1}" loading="lazy" data-lightbox>
+      <div class="photo-item-overlay"><span class="photo-zoom-icon">⊕</span></div>`;
+    container.appendChild(item);
+  });
+
+  // Reativar lightbox para as novas imagens
+  const imgs = container.querySelectorAll('[data-lightbox]');
+  const lb = document.getElementById('lightbox');
+  if (lb && imgs.length) {
+    const lbImg = document.getElementById('lb-img');
+    const imgArr = Array.from(imgs);
+    let currentIdx = 0;
+    const open = (i) => {
+      currentIdx = i;
+      lbImg.src = imgArr[i].src;
+      lb.style.opacity = '1';
+      lb.style.pointerEvents = 'all';
+      document.body.style.overflow = 'hidden';
+    };
+    imgArr.forEach((img, i) => img.addEventListener('click', () => open(i)));
+    document.getElementById('lb-prev').onclick = () => open((currentIdx - 1 + imgArr.length) % imgArr.length);
+    document.getElementById('lb-next').onclick = () => open((currentIdx + 1) % imgArr.length);
+  }
+}
+
+// ── VOLTAR
+document.getElementById('back-btn').addEventListener('click', () => {
+  document.getElementById('albums-grid').style.display = '';
+  document.getElementById('album-view').classList.remove('open');
+  document.getElementById('album-photos').innerHTML = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
 </body>
 </html>
