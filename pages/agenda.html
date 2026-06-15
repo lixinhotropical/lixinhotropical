@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,26 +11,39 @@
     .agenda-tabs {
       display: flex;
       gap: 0;
-      border-bottom: 1px solid rgba(245,240,232,0.1);
+      border-bottom: 1px solid rgba(245, 240, 232, 0.1);
       margin-bottom: 3rem;
     }
+
     .tab-btn {
       padding: 0.85rem 2rem;
       font-size: 0.8rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-weight: 600;
-      color: rgba(245,240,232,0.4);
+      color: rgba(245, 240, 232, 0.4);
       border-bottom: 2px solid transparent;
       margin-bottom: -1px;
       transition: all 0.2s;
       background: none;
     }
-    .tab-btn.active { color: var(--white); border-bottom-color: var(--red); }
-    .tab-btn:hover { color: var(--white); }
 
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
+    .tab-btn.active {
+      color: var(--white);
+      border-bottom-color: var(--red);
+    }
+
+    .tab-btn:hover {
+      color: var(--white);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
 
     .show-row {
       display: grid;
@@ -37,219 +51,352 @@
       gap: 1.5rem;
       align-items: center;
       padding: 1.5rem 0;
-      border-bottom: 1px solid rgba(245,240,232,0.06);
+      border-bottom: 1px solid rgba(245, 240, 232, 0.06);
       transition: background 0.2s;
     }
-    .show-row:hover { background: rgba(245,240,232,0.02); }
-    .show-row:first-child { border-top: 1px solid rgba(245,240,232,0.06); }
 
-    .show-row .date-block { text-align: center; }
-    .show-row .date-block .day { font-family: var(--font-display); font-size: 2.8rem; line-height: 1; color: var(--red); }
-    .show-row .date-block .month-year { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.4); }
+    .show-row:hover {
+      background: rgba(245, 240, 232, 0.02);
+    }
 
-    .show-details .venue { font-size: 1.1rem; font-weight: 600; }
-    .show-details .location { font-size: 0.85rem; color: rgba(245,240,232,0.5); margin-top: 0.2rem; }
-    .show-details .desc { font-size: 0.82rem; color: rgba(245,240,232,0.45); margin-top: 0.5rem; max-width: 400px; }
+    .show-row:first-child {
+      border-top: 1px solid rgba(245, 240, 232, 0.06);
+    }
 
-    .show-actions { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
+    .show-row .date-block {
+      text-align: center;
+    }
 
-    .past-row { opacity: 0.45; }
-    .past-row:hover { opacity: 0.75; }
+    .show-row .date-block .day {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      line-height: 1;
+      color: var(--red);
+    }
+
+    .show-row .date-block .month-year {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245, 240, 232, 0.4);
+    }
+
+    .show-details .venue {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .show-details .location {
+      font-size: 0.85rem;
+      color: rgba(245, 240, 232, 0.5);
+      margin-top: 0.2rem;
+    }
+
+    .show-details .desc {
+      font-size: 0.82rem;
+      color: rgba(245, 240, 232, 0.45);
+      margin-top: 0.5rem;
+      max-width: 400px;
+    }
+
+    .show-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-end;
+    }
+
+    .past-row {
+      opacity: 0.45;
+    }
+
+    .past-row:hover {
+      opacity: 0.75;
+    }
 
     @media (max-width: 640px) {
-      .show-row { grid-template-columns: 60px 1fr; }
-      .show-actions { display: none; }
+      .show-row {
+        grid-template-columns: 60px 1fr;
+      }
+
+      .show-actions {
+        display: none;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<nav id="nav" role="navigation" aria-label="Menu principal">
-  <div class="nav-inner">
-    <a class="nav-logo" href="../index.html"><img src="../assets/img/logo.png" alt="Lixinho Tropical"></a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Início</a></li><li><a href="sobre.html">A Banda</a></li>
-      <li><a href="show.html">O Show</a></li><li><a href="agenda.html">Agenda</a></li>
-      <li><a href="fotos.html">Fotos</a></li><li><a href="videos.html">Vídeos</a></li>
-      <li><a href="clipping.html">Clipping</a></li><li><a href="loja.html">Loja</a></li>
-      <li><a href="musicas.html">Músicas</a></li>
-      <li><a href="contato.html" class="btn btn-red nav-cta">Contato</a></li>
-    </ul>
-    <button id="hamburger" class="hamburger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-<div id="mobile-nav" class="nav-mobile">
-  <a href="../index.html">Início</a><a href="sobre.html">A Banda</a><a href="show.html">O Show</a>
-  <a href="agenda.html">Agenda</a><a href="fotos.html">Fotos</a><a href="videos.html">Vídeos</a>
-  <a href="clipping.html">Clipping</a><a href="loja.html">Loja</a><a href="musicas.html">Músicas</a>
-  <a href="contato.html">Contato</a>
-</div>
-
-<header class="page-hero" data-title="AGENDA">
-  <div class="container">
-    <p class="section-label" data-reveal>Shows & Eventos</p>
-    <h1 data-reveal><span class="text-red">Agenda</span></h1>
-    <p class="mt-3" style="max-width:480px;color:rgba(245,240,232,0.65)" data-reveal>
-      Acompanhe as próximas datas e relembre os shows passados.
-    </p>
-  </div>
-</header>
-
-<div class="ticker-wrap" aria-hidden="true">
-  <div class="ticker-track">
-    <span class="ticker-item">Lixinho Tropical</span><span class="ticker-sep">✦</span>
-    <span class="ticker-item">Música Safada Brasileira</span><span class="ticker-sep">✦</span>
-    <span class="ticker-item">São Paulo – SP</span><span class="ticker-sep">✦</span>
-  </div>
-</div>
-
-<section class="section" aria-label="Lista de shows">
-  <div class="container">
-    <div class="agenda-tabs" role="tablist">
-      <button class="tab-btn active" role="tab" aria-selected="true" data-tab="proximos">Próximos Shows</button>
-      <button class="tab-btn" role="tab" aria-selected="false" data-tab="passados">Shows Passados</button>
+  <nav id="nav" role="navigation" aria-label="Menu principal">
+    <div class="nav-inner">
+      <a class="nav-logo" href="../index.html"><img src="../assets/img/logo.png" alt="Lixinho Tropical"></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Início</a></li>
+        <li><a href="sobre.html">A Banda</a></li>
+        <li><a href="show.html">O Show</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="fotos.html">Fotos</a></li>
+        <li><a href="videos.html">Vídeos</a></li>
+        <li><a href="clipping.html">Clipping</a></li>
+        <li><a href="loja.html">Loja</a></li>
+        <li><a href="musicas.html">Músicas</a></li>
+        <li><a href="contato.html" class="btn btn-red nav-cta">Contato</a></li>
+      </ul>
+      <button id="hamburger" class="hamburger" aria-label="Abrir menu"
+        aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
+  </nav>
+  <div id="mobile-nav" class="nav-mobile">
+    <a href="../index.html">Início</a><a href="sobre.html">A Banda</a><a href="show.html">O Show</a>
+    <a href="agenda.html">Agenda</a><a href="fotos.html">Fotos</a><a href="videos.html">Vídeos</a>
+    <a href="clipping.html">Clipping</a><a href="loja.html">Loja</a><a href="musicas.html">Músicas</a>
+    <a href="contato.html">Contato</a>
+  </div>
 
-    <!-- PRÓXIMOS -->
-    <div id="tab-proximos" class="tab-panel active" role="tabpanel">
-      <div class="show-row" data-reveal>
-        <div class="date-block"><div class="day">28</div><div class="month-year">Jun 2025</div></div>
-        <div class="show-details">
-          <div class="venue">Casa de Francisca</div>
-          <div class="location">📍 São Paulo, SP</div>
-          <div class="desc">Show autoral com repertório do novo trabalho.</div>
-        </div>
-        <div class="show-actions">
-          <span class="tag tag-red">Show</span>
-          <a href="#" class="btn btn-outline" style="padding:0.5rem 1rem;font-size:0.75rem">Ingressos →</a>
-        </div>
-      </div>
-      <div class="show-row" data-reveal>
-        <div class="date-block"><div class="day">12</div><div class="month-year">Jul 2025</div></div>
-        <div class="show-details">
-          <div class="venue">Baiúca</div>
-          <div class="location">📍 São Paulo, SP</div>
-          <div class="desc">Noite especial com convidados.</div>
-        </div>
-        <div class="show-actions">
-          <span class="tag tag-cyan">Especial</span>
-          <a href="#" class="btn btn-outline" style="padding:0.5rem 1rem;font-size:0.75rem">Ingressos →</a>
-        </div>
-      </div>
-      <div class="show-row" data-reveal>
-        <div class="date-block"><div class="day">19</div><div class="month-year">Jul 2025</div></div>
-        <div class="show-details">
-          <div class="venue">Picles Bar</div>
-          <div class="location">📍 São Paulo, SP</div>
-        </div>
-        <div class="show-actions">
-          <span class="tag tag-red">Show</span>
-        </div>
-      </div>
-      <div class="show-row" data-reveal>
-        <div class="date-block"><div class="day">02</div><div class="month-year">Ago 2025</div></div>
-        <div class="show-details">
-          <div class="venue">Ocupação Fervo</div>
-          <div class="location">📍 São Paulo, SP</div>
-        </div>
-        <div class="show-actions">
-          <span class="tag tag-red">Show</span>
-        </div>
-      </div>
-      <div class="mt-4" data-reveal>
-        <p style="font-size:0.85rem;color:rgba(245,240,232,0.4)">Para contratar a banda para seu evento: <a href="contato.html" style="color:var(--cyan)">fale com a gente →</a></p>
-      </div>
+  <header class="page-hero" data-title="AGENDA">
+    <div class="container">
+      <p class="section-label" data-reveal>Shows & Eventos</p>
+      <h1 data-reveal><span class="text-red">Agenda</span></h1>
+      <p class="mt-3" style="max-width:480px;color:rgba(245,240,232,0.65)" data-reveal>
+        Acompanhe as próximas datas e relembre os shows passados.
+      </p>
     </div>
+  </header>
 
-    <!-- PASSADOS -->
-    <div id="tab-passados" class="tab-panel" role="tabpanel">
-      <div class="show-row past-row" data-reveal>
-        <div class="date-block"><div class="day">15</div><div class="month-year">Mar 2025</div></div>
-        <div class="show-details">
-          <div class="venue">IBT — Instituto Brasil de Teatro</div>
-          <div class="location">📍 São Paulo, SP</div>
-        </div>
-        <div class="show-actions"><span class="tag tag-white">Realizado</span></div>
-      </div>
-      <div class="show-row past-row" data-reveal>
-        <div class="date-block"><div class="day">24</div><div class="month-year">Jan 2025</div></div>
-        <div class="show-details">
-          <div class="venue">Cotoxó 1175</div>
-          <div class="location">📍 São Paulo, SP</div>
-        </div>
-        <div class="show-actions"><span class="tag tag-white">Realizado</span></div>
-      </div>
-      <div class="show-row past-row" data-reveal>
-        <div class="date-block"><div class="day">07</div><div class="month-year">Dez 2024</div></div>
-        <div class="show-details">
-          <div class="venue">Casa de Francisca</div>
-          <div class="location">📍 São Paulo, SP</div>
-          <div class="desc">Lançamento do projeto audiovisual "Sururu Lover's".</div>
-        </div>
-        <div class="show-actions"><span class="tag tag-white">Realizado</span></div>
-      </div>
-      <div class="show-row past-row" data-reveal>
-        <div class="date-block"><div class="day">29</div><div class="month-year">Jun 2024</div></div>
-        <div class="show-details">
-          <div class="venue">Baile Caju Amazônico — Festa de São João</div>
-          <div class="location">📍 São Paulo, SP</div>
-          <div class="desc">Com Manoel Cordeiro. Tradições do norte e nordeste.</div>
-        </div>
-        <div class="show-actions"><span class="tag tag-red" style="opacity:.6">Especial</span></div>
-      </div>
-      <div class="show-row past-row" data-reveal>
-        <div class="date-block"><div class="day">12</div><div class="month-year">Abr 2024</div></div>
-        <div class="show-details">
-          <div class="venue">Baiúca</div>
-          <div class="location">📍 São Paulo, SP</div>
-        </div>
-        <div class="show-actions"><span class="tag tag-white">Realizado</span></div>
-      </div>
-      <div class="show-row past-row" data-reveal>
-        <div class="date-block"><div class="day">18</div><div class="month-year">Nov 2023</div></div>
-        <div class="show-details">
-          <div class="venue">Picles Bar</div>
-          <div class="location">📍 São Paulo, SP</div>
-        </div>
-        <div class="show-actions"><span class="tag tag-white">Realizado</span></div>
-      </div>
-      <div class="show-row past-row" data-reveal>
-        <div class="date-block"><div class="day">05</div><div class="month-year">Ago 2023</div></div>
-        <div class="show-details">
-          <div class="venue">Ocupação Fervo</div>
-          <div class="location">📍 São Paulo, SP</div>
-        </div>
-        <div class="show-actions"><span class="tag tag-white">Realizado</span></div>
-      </div>
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item">Lixinho Tropical</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Música Safada Brasileira</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">São Paulo – SP</span><span class="ticker-sep">✦</span>
     </div>
   </div>
-</section>
 
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand"><img src="../assets/img/logo.png" alt="Lixinho Tropical"><p class="footer-tagline">Música Safada Brasileira<br>São Paulo – SP</p><div class="footer-socials"><a href="https://www.instagram.com/lixinhotropical/" class="social-link social-ig" aria-label="Instagram" target="_blank" rel="noopener"><span data-social-icon="instagram"></span></a><a href="https://open.spotify.com/intl-pt/artist/3noX4LW5rgdaEjRDBNDcei?si=TKRuq_6HRUKj_NIrK3AUfQ" class="social-link social-sp" aria-label="Spotify" target="_blank" rel="noopener"><span data-social-icon="spotify"></span></a><a href="https://soundcloud.com/lixinho-tropical" class="social-link social-sc" aria-label="SoundCloud" target="_blank" rel="noopener"><span data-social-icon="soundcloud"></span></a><a href="https://www.youtube.com/@lixinhotropical" class="social-link social-yt" aria-label="YouTube" target="_blank" rel="noopener"><span data-social-icon="youtube"></span></a><a href="https://www.tiktok.com/@lixinhotropical" class="social-link social-tt" aria-label="TikTok" target="_blank" rel="noopener"><span data-social-icon="tiktok"></span></a></div></div>
-      <div><p class="footer-col-title">Navegação</p><ul class="footer-col-links"><li><a href="../index.html">Início</a></li><li><a href="sobre.html">A Banda</a></li><li><a href="show.html">O Show</a></li><li><a href="fotos.html">Fotos</a></li></ul></div>
-      <div><p class="footer-col-title">Mais</p><ul class="footer-col-links"><li><a href="loja.html">Lojinha</a></li><li><a href="musicas.html">Músicas</a></li><li><a href="contato.html">Contato</a></li></ul></div>
-      <div><p class="footer-col-title">Contato</p><ul class="footer-col-links"><li><a href="mailto:lixinhotropical@gmail.com">lixinhotropical@gmail.com</a></li><li><a href="https://wa.me/5511984214384" target="_blank">  (11) 98421-4384</a></li></ul></div>
+  <section class="section" aria-label="Lista de shows">
+    <div class="container">
+      <div class="agenda-tabs" role="tablist">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="proximos">Próximos Shows</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="passados">Shows Passados</button>
+      </div>
+
+      <!-- PRÓXIMOS -->
+      <div id="tab-proximos" class="tab-panel active" role="tabpanel">
+        <div class="show-row" data-reveal>
+          <div class="date-block">
+            <div class="day">20</div>
+            <div class="month-year">Jun 2026</div>
+          </div>
+          <div class="show-details">
+            <div class="venue">Arraiá da Lixinho Tropical</div>
+            <div class="location">📍 São Paulo, SP</div>
+            <div class="desc">Arraiá com a banda, DJs, comidas típicas e bebidas.</div>
+          </div>
+          <div class="show-actions">
+            <span class="tag tag-red">Show</span>
+            <a href="#" class="btn btn-outline" style="padding:0.5rem 1rem;font-size:0.75rem">Ingressos →</a>
+          </div>
+        </div>
+        <div class="show-row" data-reveal>
+          <div class="date-block">
+            <div class="day">11</div>
+            <div class="month-year">Jul 2026</div>
+          </div>
+          <div class="show-details">
+            <div class="venue">FESTA FECHADA</div>
+            <div class="location">📍 São Paulo, SP</div>
+            <div class="desc">Festa fechada</div>
+          </div>
+          <div class="show-actions">
+            <span class="tag tag-cyan">Especial</span>
+            <a href="#" class="btn btn-outline" style="padding:0.5rem 1rem;font-size:0.75rem">ESGOTADO! →</a>
+          </div>
+        </div>
+        <div class="show-row" data-reveal>
+          <div class="date-block">
+            <div class="day">18</div>
+            <div class="month-year">Jul 2026</div>
+          </div>
+          <div class="show-details">
+            <div class="venue">Baile Brega do Lobo</div>
+            <div class="location">📍 Jundiaí, SP</div>
+          </div>
+          <div class="show-actions">
+            <span class="tag tag-red">Show</span>
+          </div>
+        </div>
+        <div class="show-row" data-reveal>
+          <div class="date-block">
+            <div class="day">23</div>
+            <div class="month-year">Jul 2026</div>
+          </div>
+          <div class="show-details">
+            <div class="venue">Casa de Francisca</div>
+            <div class="location">📍 São Paulo, SP</div>
+          </div>
+          <div class="show-actions">
+            <span class="tag tag-red">Show</span>
+          </div>
+        </div>
+        <div class="mt-4" data-reveal>
+          <p style="font-size:0.85rem;color:rgba(245,240,232,0.4)">Para contratar a banda para seu evento: <a
+              href="contato.html" style="color:var(--cyan)">fale com a gente →</a></p>
+        </div>
+      </div>
+
+      <!-- PASSADOS -->
+      <div id="tab-passados" class="tab-panel" role="tabpanel">
+        <div class="show-row past-row" data-reveal>
+          <div class="date-block">
+            <div class="day">13</div>
+            <div class="month-year">Dez 2025</div>
+          </div>
+          <div class="show-details">
+            <div class="venue">IBT — Instituto Brasil de Teatro</div>
+            <div class="location">📍 São Paulo, SP</div>
+          </div>
+          <div class="show-actions"><span class="tag tag-white">Realizado</span></div>
+        </div>
+        <div class="show-row past-row" data-reveal>
+          <div class="date-block">
+            <div class="day">24</div>
+            <div class="month-year">Jan 2025</div>
+          </div>
+          <div class="show-details">
+            <div class="venue">Ocupação Fervo</div>
+            <div class="location">📍 São Paulo, SP</div>
+          </div>
+          <div class="show-actions"><span class="tag tag-white">Realizado</span></div>
+        </div>
+        <div class="show-row past-row" data-reveal>
+          <div class="date-block">
+            <div class="day">07</div>
+            <div class="month-year">Dez 2024</div>
+          </div>
+          <div class="show-details">
+            <div class="venue">Casa de Francisca</div>
+            <div class="location">📍 São Paulo, SP</div>
+            <div class="desc">Lançamento do projeto audiovisual "Sururu Lover's".</div>
+          </div>
+          <div class="show-actions"><span class="tag tag-white">Realizado</span></div>
+        </div>
+        <div class="show-row past-row" data-reveal>
+          <div class="date-block">
+            <div class="day">07</div>
+            <div class="month-year">Jun 2025</div>
+          </div>
+          <div class="show-details">
+            <div class="venue">Baile Caju Amazônico — Festa de São João</div>
+            <div class="location">📍 São Paulo, SP</div>
+            <div class="desc">Com Manoel Cordeiro. Tradições do norte e nordeste.</div>
+          </div>
+          <div class="show-actions"><span class="tag tag-red" style="opacity:.6">Especial</span></div>
+        </div>
+        <div class="show-row past-row" data-reveal>
+          <div class="date-block">
+            <div class="day">15</div>
+            <div class="month-year">Mai 2025</div>
+          </div>
+          <div class="show-details">
+            <div class="venue">Picles</div>
+            <div class="location">📍 São Paulo, SP</div>
+            <div class="desc">Com Rapadura Xique-Chico.</div>
+          </div>
+          <div class="show-actions"><span class="tag tag-white">Realizado</span></div>
+        </div>
+        <div class="show-row past-row" data-reveal>
+          <div class="date-block">
+            <div class="day">18</div>
+            <div class="month-year">Nov 2023</div>
+          </div>
+          <div class="show-details">
+            <div class="venue">Picles Bar</div>
+            <div class="location">📍 São Paulo, SP</div>
+          </div>
+          <div class="show-actions"><span class="tag tag-white">Realizado</span></div>
+        </div>
+        <div class="show-row past-row" data-reveal>
+          <div class="date-block">
+            <div class="day">05</div>
+            <div class="month-year">Ago 2023</div>
+          </div>
+          <div class="show-details">
+            <div class="venue">Ocupação Fervo</div>
+            <div class="location">📍 São Paulo, SP</div>
+          </div>
+          <div class="show-actions"><span class="tag tag-white">Realizado</span></div>
+        </div>
+      </div>
     </div>
-    <div class="footer-bottom"><p class="footer-copy">© 2025 Lixinho Tropical.</p><nav class="footer-legal"><a href="cookies.html">Cookies</a><a href="termos.html">Termos</a><a href="suporte.html">Suporte</a></nav></div>
-  </div>
-</footer>
-<div id="cookie-banner" role="dialog" style="display:none;"><p>Usamos cookies. <a href="cookies.html">Saiba mais</a>.</p><div class="cookie-actions"><button id="cookie-accept">Aceitar</button><button id="cookie-decline">Recusar</button></div></div>
+  </section>
 
-<script src="../js/global.js"></script>
-<script>
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected','true');
-      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand"><img src="../assets/img/logo.png" alt="Lixinho Tropical">
+          <p class="footer-tagline">Música Safada Brasileira<br>São Paulo – SP</p>
+          <div class="footer-socials"><a href="https://www.instagram.com/lixinhotropical/" class="social-link social-ig"
+              aria-label="Instagram" target="_blank" rel="noopener"><span data-social-icon="instagram"></span></a><a
+              href="https://open.spotify.com/intl-pt/artist/3noX4LW5rgdaEjRDBNDcei?si=TKRuq_6HRUKj_NIrK3AUfQ"
+              class="social-link social-sp" aria-label="Spotify" target="_blank" rel="noopener"><span
+                data-social-icon="spotify"></span></a><a href="https://soundcloud.com/lixinho-tropical"
+              class="social-link social-sc" aria-label="SoundCloud" target="_blank" rel="noopener"><span
+                data-social-icon="soundcloud"></span></a><a href="https://www.youtube.com/@lixinhotropical"
+              class="social-link social-yt" aria-label="YouTube" target="_blank" rel="noopener"><span
+                data-social-icon="youtube"></span></a><a href="https://www.tiktok.com/@lixinhotropical"
+              class="social-link social-tt" aria-label="TikTok" target="_blank" rel="noopener"><span
+                data-social-icon="tiktok"></span></a></div>
+        </div>
+        <div>
+          <p class="footer-col-title">Navegação</p>
+          <ul class="footer-col-links">
+            <li><a href="../index.html">Início</a></li>
+            <li><a href="sobre.html">A Banda</a></li>
+            <li><a href="show.html">O Show</a></li>
+            <li><a href="fotos.html">Fotos</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Mais</p>
+          <ul class="footer-col-links">
+            <li><a href="loja.html">Lojinha</a></li>
+            <li><a href="musicas.html">Músicas</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Contato</p>
+          <ul class="footer-col-links">
+            <li><a href="mailto:lixinhotropical@gmail.com">lixinhotropical@gmail.com</a></li>
+            <li><a href="https://wa.me/5511984214384" target="_blank"> (11) 98421-4384</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Lixinho Tropical.</p>
+        <nav class="footer-legal"><a href="cookies.html">Cookies</a><a href="termos.html">Termos</a><a
+            href="suporte.html">Suporte</a></nav>
+      </div>
+    </div>
+  </footer>
+  <div id="cookie-banner" role="dialog" style="display:none;">
+    <p>Usamos cookies. <a href="cookies.html">Saiba mais</a>.</p>
+    <div class="cookie-actions"><button id="cookie-accept">Aceitar</button><button id="cookie-decline">Recusar</button>
+    </div>
+  </div>
+
+  <script src="../js/global.js"></script>
+  <script>
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
     });
-  });
-</script>
-<script src="../js/social-icons.js"></script>
+  </script>
+  <script src="../js/social-icons.js"></script>
 </body>
+
 </html>
