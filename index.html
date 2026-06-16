@@ -18,7 +18,7 @@
     .hero-bg-img {
       background-image: url('assets/img/trio_serio.jpg');
       background-position: center top;
-      opacity: 0.5;
+      opacity: 0.8;
     }
 
     .hero-content {
@@ -269,7 +269,7 @@
   <nav id="nav" role="navigation" aria-label="Menu principal">
     <div class="nav-inner">
       <a class="nav-logo" href="index.html" aria-label="Lixinho Tropical – início">
-        <img src="assets/img/logo.png" alt="Lixinho Tropical">
+        <img src="assets/img/logo_cortado.png" alt="Lixinho Tropical">
       </a>
       <ul class="nav-links">
         <li><a href="index.html">Início</a></li>
@@ -346,17 +346,18 @@
     <div class="container">
       <div class="about-split">
         <div class="about-img-wrap" data-reveal>
-          <img class="about-img-main" src="assets/img/emede.jpg" alt="Lixinho Tropical — foto de divulgação"
+          <img class="about-img-main" src="assets/img/lixinho_ivy_01.jpg" alt="Lixinho Tropical — foto de divulgação"
             loading="lazy">
-          <img class="about-img-accent" src="assets/img/trio_festa.jpg" alt="Detalhe do show" loading="lazy">
+          <img class="about-img-accent" src="assets/img/sururu.png" alt="Detalhe do show" loading="lazy">
         </div>
         <div class="about-text">
           <p class="section-label" data-reveal>A Banda</p>
           <h2 data-reveal>Culinária<br><span class="text-red">&amp; Música</span></h2>
           <p data-reveal>
-            A Lixinho Tropical nasce do encontro entre culinária e música, idealizada por Ivy Almeida no projeto
-            <strong>SURURU LOVER'S</strong>. Uma formação multicultural que une Aracaju (SE) e Campo Limpo Paulista
-            (SP), radicada na capital paulista há mais de uma década.
+            A Lixinho Tropical nasceu do encontro entre culinária e música, idealizado por Ivy Almeida no projeto
+            <strong>SURURU LOVERS</strong>. Uma formação multicultural que reune músicos de Aracaju (SE) e Campo Limpo
+            Paulista
+            (SP), radicados na capital paulista há mais de uma década.
           </p>
           <p data-reveal>
             Uma narrativa sonora que tensiona as experiências entre o litoral e o concreto, o popular e o pop, o íntimo
@@ -383,12 +384,12 @@
       <h2 class="mb-4" data-reveal>Quem é a<br><span class="text-cyan">Lixinho Tropical</span></h2>
       <div class="members">
         <div class="member-card" data-reveal>
-          <img src="assets/img/deborah_solo_02.jpg" alt="Déborah Costa — vocal e compositora" loading="lazy">
+          <img src="assets/img/deborah_solo_03.jpg" alt="Déborah Costa — vocal e compositora" loading="lazy">
           <div class="member-always">
             <p class="member-name" style="color:var(--white)">Déborah</p>
           </div>
           <div class="member-info">
-            <p class="member-role">Vocal · Musa Fundadora · Compositora</p>
+            <p class="member-role">Vocal</p>
             <p class="member-name">Déborah Costa</p>
           </div>
         </div>
@@ -398,17 +399,17 @@
             <p class="member-name" style="color:var(--white)">Aragão</p>
           </div>
           <div class="member-info">
-            <p class="member-role">Guitarra · Vocal · Compositor</p>
+            <p class="member-role">Guitarra · Vocal</p>
             <p class="member-name">Edézio 'Aragão'</p>
           </div>
         </div>
         <div class="member-card" data-reveal>
           <img src="assets/img/magrao_solo.jpg" alt="Filipe Magrão — baixo e synth" loading="lazy">
           <div class="member-always">
-            <p class="member-name" style="color:var(--white)">Filipe Magrão</p>
+            <p class="member-name" style="color:var(--white)">Magrão</p>
           </div>
           <div class="member-info">
-            <p class="member-role">Baixo · Synth · Compositor</p>
+            <p class="member-role">Baixo · Guitarra</p>
             <p class="member-name">Filipe 'Magrão'</p>
           </div>
         </div>
@@ -426,66 +427,22 @@
         </div>
         <a href="pages/agenda.html" class="btn btn-outline" data-reveal>Ver agenda completa →</a>
       </div>
-      <div class="shows-teaser">
-        <div class="show-item" data-reveal>
-          <div class="show-date">
-            <div class="day">20</div>
-            <div class="month">Jun</div>
-          </div>
-          <div>
-            <div class="show-venue">Arraíá da Lixinho Tropical</div>
-            <div class="show-city">São Paulo, SP</div>
-            <div class="show-type"><span class="tag tag-cyan">Especial</span></div>
-          </div>
-        </div>
-        <div class="show-item" data-reveal>
-          <div class="show-date">
-            <div class="day">11</div>
-            <div class="month">Jul</div>
-          </div>
-          <div>
-            <div class="show-venue">Festa Secreta</div>
-            <div class="show-city">São Paulo, SP</div>
-            <div class="show-type"><span class="tag tag-red">Show</span></div>
-          </div>
-        </div>
-        <div class="show-item" data-reveal>
-          <div class="show-date">
-            <div class="day">18</div>
-            <div class="month">Jul</div>
-          </div>
-          <div>
-            <div class="show-venue">Aniversário Lobão</div>
-            <div class="show-city">Jundiaí, SP</div>
-            <div class="show-type"><span class="tag tag-red">Show</span></div>
-          </div>
-        </div>
-        <div class="show-item" data-reveal>
-          <div class="show-date">
-            <div class="day">23</div>
-            <div class="month">Jul</div>
-          </div>
-          <div>
-            <div class="show-venue">Casa de Francisca</div>
-            <div class="show-city">São Paulo, SP</div>
-            <div class="show-type"><span class="tag tag-red">Show</span></div>
-          </div>
-        </div>
-      </div>
+      <!-- Shows renderizados automaticamente por js/shows.js + js/shows-render.js -->
+      <div id="shows-home"></div>
     </div>
   </section>
 
   <!-- CTA -->
   <section class="cta-band" aria-label="Chamada para contato">
     <div class="container" style="position:relative;z-index:1">
-      <p class="section-label" style="justify-content:center;color:rgba(245,240,232,0.6)" data-reveal>Booking &
+      <p class="section-label" style="justify-content:center;color:rgba(245,240,232,0.6);margin-left:-3rem" data-reveal>Booking &
         Contratações</p>
-      <h2 data-reveal>Bora<br>Tocar!</h2>
+      <h2 data-reveal >Bora<br>Tocar!</h2>
       <p data-reveal>Agende um show, evento ou residência artística.</p>
       <div class="flex gap-2" style="justify-content:center;flex-wrap:wrap" data-reveal>
         <a href="pages/contato.html" class="btn btn-outline">Falar com a gente →</a>
         <a href="https://wa.me/5511984214384" class="btn" style="background:rgba(245,240,232,0.15);color:var(--white)"
-          target="_blank" rel="noopener">WhatsApp direto</a>
+          target="_blank" rel="noopener">Chamar no Whatsapp</a>
       </div>
     </div>
   </section>
@@ -495,7 +452,7 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <img src="assets/img/logo.png" alt="Lixinho Tropical">
+          <img src="assets/img/logo_cortado.png" alt="Lixinho Tropical">
           <p class="footer-tagline">Música Safada Brasileira<br>São Paulo – SP</p>
           <div class="footer-socials">
             <a href="https://www.instagram.com/lixinhotropical/" class="social-link social-ig" aria-label="Instagram"
@@ -560,6 +517,8 @@
 
   <script src="js/global.js"></script>
   <script src="js/social-icons.js"></script>
+  <script src="js/shows.js"></script>
+  <script src="js/shows-render.js"></script>
 </body>
 
 </html>

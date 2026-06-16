@@ -95,7 +95,10 @@ p { line-height: 1.7; }
   align-items: center;
   justify-content: space-between;
 }
-.nav-logo img { height: 44px; }
+.nav-logo img { 
+  height: 64px;
+  margin-top: 10px;
+}
 .nav-links {
   display: flex;
   align-items: center;
@@ -303,7 +306,7 @@ footer {
   gap: 3rem;
   margin-bottom: 3rem;
 }
-.footer-brand img { height: 48px; margin-bottom: 1.25rem; }
+.footer-brand img { height: 78px; margin-bottom: 1.25rem; }
 .footer-tagline { font-size: 0.85rem; color: rgba(245,240,232,0.5); line-height: 1.6; max-width: 220px; }
 .footer-socials { display: flex; gap: 1rem; margin-top: 1.5rem; }
 .footer-social-link {
