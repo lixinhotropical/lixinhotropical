@@ -22,7 +22,7 @@
 window.LT = window.LT || {};
 window.LT.shows = [
   {
-    date: '2025-06-20',
+    date: '2026-06-20',
     day: '20', month: 'Jun', year: '2025',
     venue: 'Arraiá da Lixinho Tropical',
     city: 'São Paulo, SP',
@@ -32,8 +32,8 @@ window.LT.shows = [
     private: false,
   },
   {
-    date: '2025-07-11',
-    day: '11', month: 'Jul', year: '2025',
+    date: '2026-07-11',
+    day: '11', month: 'Jul', year: '2026',
     venue: 'Festa Privada',
     city: 'São Paulo, SP',
     time: '',
@@ -42,8 +42,8 @@ window.LT.shows = [
     private: true,
   },
   {
-    date: '2025-07-18',
-    day: '18', month: 'Jul', year: '2025',
+    date: '2026-07-18',
+    day: '18', month: 'Jul', year: '2026',
     venue: 'Baile Brega do Lobo',
     city: 'São Paulo, SP',
     time: 'Das 14h às 22h · Entrada Gratuita',
@@ -52,8 +52,8 @@ window.LT.shows = [
     private: false,
   },
   {
-    date: '2025-07-23',
-    day: '23', month: 'Jul', year: '2025',
+    date: '2026-07-23',
+    day: '23', month: 'Jul', year: '2026',
     venue: 'Casa de Francisca',
     city: 'Pinheiros, São Paulo, SP',
     time: 'Às 21h · Primeiras 100 pessoas: gratuito',
