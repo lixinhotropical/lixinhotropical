@@ -1,528 +1,529 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Lixinho Tropical — Música Safada Brasileira. Forró, Ijexá, Funk, Piseiro e Cumbia. São Paulo, SP.">
+  <meta name="description" content="Lixinho Tropical — Música Safada Brasileira. São Paulo, SP.">
   <title>Lixinho Tropical — Música Safada Brasileira</title>
   <link rel="stylesheet" href="css/global.css">
   <style>
-    /* ── HOME-SPECIFIC ── */
-    .hero {
-      min-height: 100svh;
-      align-items: flex-end;
+    /* ── HOME ── */
+    html, body { height: 100%; }
+
+    /* ── NAV centralizado ── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+    #nav.scrolled {
+      background: rgba(8,8,8,0.95);
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.75rem clamp(1rem,4vw,3rem) 0;
+    }
+    .nav-logo img { height: 64px; margin-bottom: 0.4rem; }
+    .nav-links-row {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding-bottom: 0.6rem;
+    }
+    .nav-links-row a {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.7);
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links-row a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1.5px;
+      background: var(--red);
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+    .nav-links-row a:hover { color: var(--white); }
+    .nav-links-row a:hover::after { transform: scaleX(1); }
+    .nav-cta-btn {
+      font-size: 0.75rem;
+      padding: 0.45rem 1.1rem;
+      background: var(--red);
+      color: var(--white);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .nav-cta-btn:hover { background: #ff0020; }
+
+    /* hamburger fica absoluto no topo direito */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      width: 28px;
+      position: absolute;
+      right: clamp(1rem,4vw,3rem);
+      top: 1.1rem;
+    }
+    .hamburger span { display: block; height: 2px; background: var(--white); transition: all 0.3s; }
+
+    /* ── BANNER ROTATIVO ── */
+    #banner {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 220px;
+    }
+    .banner-slide {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .banner-slide.active { display: flex; }
+    .banner-slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(8,8,8,0.55);
+    }
+    .banner-slide-content {
+      position: relative;
+      z-index: 2;
+      padding: 1.5rem;
+    }
+    .banner-slide-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.5rem;
+    }
+    .banner-slide-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .banner-slide-sub {
+      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+      color: rgba(245,240,232,0.75);
+      margin-bottom: 1.25rem;
+    }
+    .banner-slide-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.4rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .banner-slide-btn.red { background: var(--red); color: var(--white); }
+    .banner-slide-btn.red:hover { background: #ff0020; }
+    .banner-slide-btn.outline { border: 1.5px solid var(--white); color: var(--white); }
+    .banner-slide-btn.outline:hover { background: var(--white); color: var(--black); }
+
+    /* Nav do banner */
+    .banner-nav {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 0; right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+    .banner-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(245,240,232,0.35);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .banner-dot.active { background: var(--white); transform: scale(1.3); }
+    .banner-arrow {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(8,8,8,0.4);
+      border: 1px solid rgba(245,240,232,0.15);
+      color: var(--white);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 10;
+    }
+    .banner-arrow:hover { background: rgba(232,0,28,0.6); }
+    .banner-arrow.prev { left: 1rem; }
+    .banner-arrow.next { right: 1rem; }
+
+    @media (max-width: 768px) {
+      #banner { height: 180px; }
+      .banner-arrow { display: none; }
     }
 
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-end;
+    }
     .hero-bg-img {
+      position: absolute;
+      inset: 0;
       background-image: url('assets/img/trio_serio.jpg');
+      background-size: cover;
       background-position: center top;
       opacity: 0.8;
     }
-
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,8,8,0.88) 15%, rgba(8,8,8,0.1) 55%, transparent 80%);
+    }
     .hero-content {
-      padding-top: 80vh;
-    }
-
-    /* SOBRE - SPLIT */
-    .about-split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .about-img-wrap {
       position: relative;
-    }
-
-    .about-img-main {
+      z-index: 2;
       width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      border: 3px solid var(--red);
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem,4vw,3rem);
+      padding-bottom: 5rem;
     }
-
-    .about-img-accent {
-      position: absolute;
-      bottom: -2rem;
-      right: -2rem;
-      width: 55%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      border: 3px solid var(--red);
-    }
-
-    .about-text h2 {
-      margin-bottom: 1.5rem;
-    }
-
-    .about-text p {
-      color: rgba(245, 240, 232, 0.7);
-      margin-bottom: 1.25rem;
-    }
-
-    .ritmos {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin: 2rem 0;
-    }
-
-    /* MEMBROS */
-    .members {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .member-card {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .member-card img {
-      width: 100%;
-      aspect-ratio: 2/3;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.5s, opacity 0.3s;
-    }
-
-    .member-card:hover img {
-      transform: scale(1.05);
-      opacity: 0.7;
-    }
-
-    .member-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 2rem 1.25rem 1.25rem;
-      background: linear-gradient(to top, rgba(8, 8, 8, 0.95), transparent);
-      transform: translateY(30px);
-      opacity: 0;
-      transition: all 0.3s;
-    }
-
-    .member-card:hover .member-info {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .member-name {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-    }
-
-    .member-role {
-      font-size: 0.78rem;
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
       color: var(--cyan);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      margin-bottom: 0.75rem;
     }
+    .hero-title { font-family: var(--font-display); line-height: 0.9; margin-bottom: 1.5rem; }
+    .hero-title .line-red { color: var(--red); display: block; font-size: clamp(4rem,10vw,9rem); }
+    .hero-title .line-cyan { color: var(--cyan); font-family: var(--font-script); font-size: clamp(3rem,8vw,7rem); display: block; margin-top: -0.5rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-    .member-always {
-      position: absolute;
-      bottom: 1rem;
-      left: 1.25rem;
+    /* ── FOOTER FIXO ── */
+    #footer-home {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 998;
+      background: rgba(8,8,8,0.82);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(245,240,232,0.07);
+      padding: 0.65rem 0;
     }
-
-    /* SHOWS */
-    .shows-teaser {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-
-    .show-item {
+    .footer-home-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem,4vw,3rem);
       display: flex;
-      gap: 1.25rem;
-      align-items: flex-start;
-      padding: 1.25rem;
-      background: var(--gray-dark);
-      border: 1px solid rgba(245, 240, 232, 0.06);
-      border-left: 3px solid var(--red);
-      transition: border-color 0.2s, transform 0.2s;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
-
-    .show-item:hover {
-      border-color: var(--cyan);
-      transform: translateX(4px);
+    .footer-socials { display: flex; gap: 0.75rem; }
+    .social-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px;
+      border: 1px solid rgba(245,240,232,0.15);
+      border-radius: 50%;
+      color: rgba(245,240,232,0.55);
+      transition: all 0.2s;
     }
-
-    .show-date {
-      text-align: center;
-      min-width: 52px;
-    }
-
-    .show-date .day {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      line-height: 1;
-      color: var(--red);
-    }
-
-    .show-date .month {
+    .social-link svg { width: 16px; height: 16px; display: block; }
+    .social-link:hover { border-color: var(--red); color: var(--white); background: rgba(232,0,28,0.1); }
+    .social-link.social-ig:hover { border-color: #E1306C; color: #E1306C; }
+    .social-link.social-sp:hover { border-color: #1DB954; color: #1DB954; }
+    .social-link.social-sc:hover { border-color: #FF5500; color: #FF5500; }
+    .social-link.social-yt:hover { border-color: #FF0000; color: #FF0000; }
+    .social-link.social-tt:hover { border-color: #00C8E8; color: #00C8E8; }
+    .footer-copy-small {
       font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(245, 240, 232, 0.5);
+      color: rgba(245,240,232,0.25);
     }
+    .footer-legal-small { display: flex; gap: 1rem; }
+    .footer-legal-small a { font-size: 0.72rem; color: rgba(245,240,232,0.25); transition: color 0.2s; }
+    .footer-legal-small a:hover { color: var(--white); }
 
-    .show-venue {
-      font-weight: 600;
-      font-size: 0.95rem;
+    /* ── MOBILE NAV ── */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--black);
+      z-index: 9999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
     }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-family: var(--font-display); font-size: clamp(2rem,8vw,3rem); color: var(--white); letter-spacing: 0.05em; transition: color 0.2s; }
+    .nav-mobile a:hover { color: var(--red); }
+    .nav-mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2rem; color: var(--white); background: none; border: none; cursor: pointer; }
 
-    .show-city {
-      font-size: 0.8rem;
-      color: rgba(245, 240, 232, 0.5);
-      margin-top: 0.2rem;
-    }
-
-    .show-type {
-      margin-top: 0.5rem;
-    }
-
-    /* CTA BAND */
-    .cta-band {
-      background: var(--red);
-      padding: 5rem 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-band::before {
-      content: 'LIXINHO';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: var(--font-display);
-      font-size: 18vw;
-      color: rgba(245, 240, 232, 0.06);
-      white-space: nowrap;
-      pointer-events: none;
-    }
-
-    .cta-band h2 {
-      margin-bottom: 1rem;
-      position: relative;
-    }
-
-    .cta-band p {
-      color: rgba(245, 240, 232, 0.8);
-      margin-bottom: 2rem;
-      position: relative;
-    }
-
-    .cta-band .btn-outline {
-      border-color: rgba(245, 240, 232, 0.6);
-      position: relative;
-    }
-
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .about-split {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      .about-img-accent {
-        display: none;
-      }
-
-      .members {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .shows-teaser {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .members {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero-bg-img {
-        background-position: center top;
-        background-size: 250%;
-      }
-
-      .hero-content {
-        padding-top: 40vh;
-      }
+      html, body { overflow: auto; height: auto; }
+      .nav-links-row { display: none; }
+      .hamburger { display: flex; }
+      .nav-inner { flex-direction: row; justify-content: center; padding: 0.75rem clamp(1rem,4vw,3rem); }
+      .nav-logo img { height: 44px; margin-bottom: 0; }
+      .hero { position: relative; min-height: 100svh; }
+      .hero-bg-img { position: absolute; background-size: 200%; background-position: 30% top; }
+      .hero-content { padding-bottom: 5rem; padding-top: 55vh; }
+      #footer-home { position: relative; }
+      #banner { position: relative; }
+      .footer-home-inner { justify-content: center; flex-direction: column; align-items: center; text-align: center; }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- NAV -->
-  <nav id="nav" role="navigation" aria-label="Menu principal">
-    <div class="nav-inner">
-      <a class="nav-logo" href="index.html" aria-label="Lixinho Tropical – início">
-        <img src="assets/img/logo_cortado.png" alt="Lixinho Tropical">
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="pages/sobre.html">A Banda</a></li>
-        <li><a href="pages/show.html">O Show</a></li>
-        <li><a href="pages/agenda.html">Agenda</a></li>
-        <li><a href="pages/musicas.html">Músicas</a></li>
-        <li><a href="pages/fotos.html">Fotos</a></li>
-        <li><a href="pages/videos.html">Vídeos</a></li>
-        <li><a href="pages/clipping.html">Clipping</a></li>
-        <!--<li><a href="pages/loja.html">Loja</a></li>-->
-        <li><a href="pages/contato.html" class="btn btn-red nav-cta">Contato</a></li>
-      </ul>
-      <button id="hamburger" class="hamburger" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-  <div id="mobile-nav" class="nav-mobile" role="dialog" aria-label="Menu mobile">
-    <a href="index.html">Início</a>
-    <a href="pages/sobre.html">A Banda</a>
-    <a href="pages/show.html">O Show</a>
-    <a href="pages/agenda.html">Agenda</a>
-    <a href="pages/fotos.html">Fotos</a>
-    <a href="pages/videos.html">Vídeos</a>
-    <a href="pages/clipping.html">Clipping</a>
-    <!--<a href="pages/loja.html">Loja</a>-->
-    <a href="pages/musicas.html">Músicas</a>
-    <a href="pages/contato.html">Contato</a>
+<!-- NAV CENTRALIZADO -->
+<nav id="nav" role="navigation" aria-label="Menu principal">
+  <div class="nav-inner" style="position:relative">
+    <a href="index.html" aria-label="Início">
+      <img class="nav-logo" src="assets/img/logo_cortado.png" alt="Lixinho Tropical" style="height:64px;margin-bottom:0.4rem">
+    </a>
+    <ul class="nav-links-row">
+      <li><a href="pages/sobre.html">A Banda</a></li>
+      <li><a href="pages/show.html">O Show</a></li>
+      <li><a href="pages/agenda.html">Agenda</a></li>
+      <li><a href="pages/musicas.html">Músicas</a></li>
+      <li><a href="pages/fotos.html">Fotos</a></li>
+      <li><a href="pages/videos.html">Vídeos</a></li>
+      <li><a href="pages/clipping.html">Clipping</a></li>
+      <li><a href="pages/contato.html" class="nav-cta-btn">Contato</a></li>
+    </ul>
+    <button id="hamburger" class="hamburger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero" aria-label="Apresentação">
-    <div class="hero-bg">
-      <div class="hero-bg-img" role="img" aria-label="Lixinho Tropical em show"></div>
-      <div class="hero-overlay"></div>
-    </div>
-    <div class="container hero-content">
-      <p class="hero-eyebrow" data-reveal>Música Safada Brasileira · São Paulo, SP</p>
-      <h1 class="hero-title glitch" data-text="LIXINHO TROPICAL" data-reveal>
-        <span class="line-red">LIXINHO</span>
-        <span class="line-cyan">Tropical</span>
-      </h1>
-      <p class="hero-sub" data-reveal>
-        Do encontro entre culinária e música nasce uma narrativa sonora entre o litoral e o concreto, o popular e o pop,
-        o íntimo e o urbano.
-      </p>
-      <div class="hero-actions" data-reveal>
-        <a href="pages/show.html" class="btn btn-red">Conheça o Show</a>
-        <a href="pages/agenda.html" class="btn btn-outline">Próximas Datas</a>
-      </div>
-    </div>
-    <span class="hero-scroll" aria-hidden="true">Role</span>
-  </section>
+<!-- MOBILE NAV -->
+<div id="mobile-nav" class="nav-mobile" role="dialog" aria-label="Menu mobile">
+  <button class="nav-mobile-close" id="mobile-nav-close" aria-label="Fechar menu">✕</button>
+  <a href="pages/sobre.html">A Banda</a>
+  <a href="pages/show.html">O Show</a>
+  <a href="pages/agenda.html">Agenda</a>
+  <a href="pages/musicas.html">Músicas</a>
+  <a href="pages/fotos.html">Fotos</a>
+  <a href="pages/videos.html">Vídeos</a>
+  <a href="pages/clipping.html">Clipping</a>
+  <a href="pages/contato.html">Contato</a>
+</div>
 
-  <!-- TICKER -->
-  <div class="ticker-wrap" aria-hidden="true">
-    <div class="ticker-track">
-      <span class="ticker-item">Lixinho Tropical</span>
-      <span class="ticker-sep">✦</span>
-      <span class="ticker-item">Próximo Show: Arraiá da Lixinho Tropical 20/06/2026</span>
-      <span class="ticker-sep">✦</span>
-      <span class="ticker-item">Música Safada Brasileira</span>
-      <span class="ticker-sep">✦</span>
-      <span class="ticker-item">Lixinho Tropical</span>
-      <span class="ticker-sep">✦</span>
-      <span class="ticker-item">Próximo Show: Arraiá da Lixinho Tropical 20/06/2026</span>
-      <span class="ticker-sep">✦</span>
-      <span class="ticker-item">Música Safada Brasileira</span>
-      <span class="ticker-sep">✦</span>
+<!-- BANNER ROTATIVO -->
+<div id="banner">
+
+  <!-- Slide 1: Sul Tropical -->
+  <div class="banner-slide active" style="background-image:url('assets/img/foto-trio-03.jpg')">
+    <div class="banner-slide-overlay"></div>
+    <div class="banner-slide-content">
+      <p class="banner-slide-tag">Novo Disco</p>
+      <h2 class="banner-slide-title">Sul Tropical</h2>
+      <p class="banner-slide-sub">Lançamento previsto para Janeiro de 2027</p>
+      <a href="pages/musicas.html" class="banner-slide-btn red">Ouça agora →</a>
     </div>
   </div>
 
-  <!-- SOBRE -->
-  <section class="section" aria-label="Sobre a banda">
-    <div class="container">
-      <div class="about-split">
-        <div class="about-img-wrap" data-reveal>
-          <img class="about-img-main" src="assets/img/gabin.jpg" alt="Lixinho Tropical — foto de divulgação"
-            loading="lazy">
-          <img class="about-img-accent" src="assets/img/sururu.png" alt="Detalhe do show" loading="lazy">
-        </div>
-        <div class="about-text">
-          <p class="section-label" data-reveal>A Banda</p>
-          <h2 data-reveal>Culinária<br><span class="text-red">&amp; Música</span></h2>
-          <p data-reveal>
-            A Lixinho Tropical nasceu do encontro entre culinária e música, idealizado por Ivy Almeida no projeto
-            <strong>SURURU LOVERS</strong>. Uma formação multicultural que reune músicos de Aracaju (SE) e Campo Limpo
-            Paulista
-            (SP), radicados na capital paulista há mais de uma década.
-          </p>
-          <p data-reveal>
-            Uma narrativa sonora que tensiona as experiências entre o litoral e o concreto, o popular e o pop, o íntimo
-            e o urbano.
-          </p>
-          <div class="ritmos" data-reveal>
-            <span class="tag tag-red">Forró</span>
-            <span class="tag tag-red">Ijexá</span>
-            <span class="tag tag-red">Funk</span>
-            <span class="tag tag-red">Piseiro</span>
-            <span class="tag tag-red">Cumbia</span>
-            <span class="tag tag-red">Pop</span>
-          </div>
-          <a href="pages/sobre.html" class="btn btn-outline" data-reveal>Conhecer a banda →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MEMBROS -->
-  <section class="section" style="padding-top:0" aria-label="Integrantes">
-    <div class="container">
-      <p class="section-label" data-reveal>Integrantes</p>
-      <h2 class="mb-4" data-reveal>Quem é a<br><span class="text-cyan">Lixinho Tropical</span></h2>
-      <div class="members">
-        <div class="member-card" data-reveal>
-          <img src="assets/img/deborah_solo_03.jpg" alt="Déborah Costa — vocal e compositora" loading="lazy">
-          <div class="member-always">
-            <p class="member-name" style="color:var(--white)">Déborah</p>
-          </div>
-          <div class="member-info">
-            <p class="member-role">Vocal</p>
-            <p class="member-name">Déborah Costa</p>
-          </div>
-        </div>
-        <div class="member-card" data-reveal>
-          <img src="assets/img/aragao_solo.jpg" alt="Edézio Aragão — guitarra e bandolim" loading="lazy">
-          <div class="member-always">
-            <p class="member-name" style="color:var(--white)">Aragão</p>
-          </div>
-          <div class="member-info">
-            <p class="member-role">Guitarra · Vocal</p>
-            <p class="member-name">Edézio 'Aragão'</p>
-          </div>
-        </div>
-        <div class="member-card" data-reveal>
-          <img src="assets/img/magrao_solo.jpg" alt="Filipe Magrão — baixo e synth" loading="lazy">
-          <div class="member-always">
-            <p class="member-name" style="color:var(--white)">Magrão</p>
-          </div>
-          <div class="member-info">
-            <p class="member-role">Baixo · Guitarra</p>
-            <p class="member-name">Filipe 'Magrão'</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SHOWS -->
-  <section class="section" style="background:var(--gray-dark)" aria-label="Próximos shows">
-    <div class="container">
-      <div class="flex justify-between items-center mb-4 wrap gap-2">
-        <div>
-          <p class="section-label" data-reveal>Agenda</p>
-          <h2 data-reveal>Próximos<br><span class="text-red">Shows</span></h2>
-        </div>
-        <a href="pages/agenda.html" class="btn btn-outline" data-reveal>Ver agenda completa →</a>
-      </div>
-      <!-- Shows renderizados automaticamente por js/shows.js + js/shows-render.js -->
-      <div id="shows-home"></div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-band" aria-label="Chamada para contato">
-    <div class="container" style="position:relative;z-index:1">
-      <p class="section-label" style="justify-content:center;color:rgba(245,240,232,0.6);margin-left:-3rem" data-reveal>
-        Booking &
-        Contratações</p>
-      <h2 data-reveal>Bora<br>Tocar!</h2>
-      <p data-reveal>Agende um show, evento ou residência artística.</p>
-      <div class="flex gap-2" style="justify-content:center;flex-wrap:wrap" data-reveal>
-        <a href="pages/contato.html" class="btn btn-outline">Falar com a gente →</a>
-        <a href="https://wa.me/5511984214384" class="btn" style="background:rgba(245,240,232,0.15);color:var(--white)"
-          target="_blank" rel="noopener">Chamar no Whatsapp</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <img src="assets/img/logo_cortado.png" alt="Lixinho Tropical">
-          <p class="footer-tagline">Música Safada Brasileira<br>São Paulo – SP</p>
-          <div class="footer-socials">
-            <a href="https://www.instagram.com/lixinhotropical/" class="social-link social-ig" aria-label="Instagram"
-              target="_blank" rel="noopener"><span data-social-icon="instagram"></span></a><a
-              href="https://open.spotify.com/intl-pt/artist/3noX4LW5rgdaEjRDBNDcei?si=TKRuq_6HRUKj_NIrK3AUfQ"
-              class="social-link social-sp" aria-label="Spotify" target="_blank" rel="noopener"><span
-                data-social-icon="spotify"></span></a><a href="https://soundcloud.com/lixinho-tropical"
-              class="social-link social-sc" aria-label="SoundCloud" target="_blank" rel="noopener"><span
-                data-social-icon="soundcloud"></span></a><a href="https://www.youtube.com/@lixinhotropical"
-              class="social-link social-yt" aria-label="YouTube" target="_blank" rel="noopener"><span
-                data-social-icon="youtube"></span></a><a href="https://www.tiktok.com/@lixinhotropical"
-              class="social-link social-tt" aria-label="TikTok" target="_blank" rel="noopener"><span
-                data-social-icon="tiktok"></span></a>
-          </div>
-        </div>
-        <div>
-          <p class="footer-col-title">Navegação</p>
-          <ul class="footer-col-links">
-            <li><a href="pages/sobre.html">A Banda</a></li>
-            <li><a href="pages/show.html">O Show</a></li>
-            <li><a href="pages/fotos.html">Fotos</a></li>
-            <li><a href="pages/videos.html">Vídeos</a></li>
-            <li><a href="pages/clipping.html">Clipping</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="footer-col-title">Mais</p>
-          <ul class="footer-col-links">
-            <li><a href="pages/agenda.html">Agenda de Shows</a></li>
-            <li><a href="pages/loja.html">Lojinha</a></li>
-            <li><a href="pages/musicas.html">Download de Músicas</a></li>
-            <li><a href="pages/contato.html">Contato</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="footer-col-title">Contato</p>
-          <ul class="footer-col-links">
-            <li><a href="mailto:lixinhotropical@gmail.com">lixinhotropical@gmail.com</a></li>
-            <li><a href="https://wa.me/5511984214384" target="_blank" rel="noopener">(11) 98421-4384</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p class="footer-copy">© 2025 Lixinho Tropical. Todos os direitos reservados.</p>
-        <nav class="footer-legal" aria-label="Links legais">
-          <a href="pages/cookies.html">Política de Cookies</a>
-          <a href="pages/termos.html">Termos de Uso</a>
-          <a href="pages/suporte.html">Ajuda & Suporte</a>
-        </nav>
-      </div>
-    </div>
-  </footer>
-
-  <!-- COOKIE BANNER -->
-  <div id="cookie-banner" role="dialog" aria-label="Aviso de cookies" style="display:none;">
-    <p>Usamos cookies para melhorar sua experiência. <a href="pages/cookies.html">Saiba mais</a>.</p>
-    <div class="cookie-actions">
-      <button id="cookie-accept">Aceitar</button>
-      <button id="cookie-decline">Recusar</button>
+  <!-- Slide 2: Financiamento Coletivo -->
+  <div class="banner-slide" style="background-image:url('assets/img/banda-brinde.jpg')">
+    <div class="banner-slide-overlay"></div>
+    <div class="banner-slide-content">
+      <p class="banner-slide-tag">Financiamento Coletivo</p>
+      <h2 class="banner-slide-title">Apoie a<br>Lixinho Tropical!</h2>
+      <p class="banner-slide-sub">Ajude a banda a gravar o novo álbum</p>
+      <a href="pages/contato.html" class="banner-slide-btn outline">Saiba mais →</a>
     </div>
   </div>
 
-  <script src="js/global.js"></script>
-  <script src="js/social-icons.js"></script>
-  <script src="js/shows.js"></script>
-  <script src="js/shows-render.js"></script>
+  <!-- Slide 3: Agenda -->
+  <div class="banner-slide" style="background-image:url('assets/img/foto-trio-04.jpg')">
+    <div class="banner-slide-overlay"></div>
+    <div class="banner-slide-content">
+      <p class="banner-slide-tag">Agenda de Shows</p>
+      <h2 class="banner-slide-title">Próximas<br>Datas</h2>
+      <p class="banner-slide-sub">Arraiá · Baile Brega do Lobo · Casa de Francisca</p>
+      <a href="pages/agenda.html" class="banner-slide-btn red">Ver Agenda →</a>
+    </div>
+  </div>
+
+  <!-- Controles -->
+  <button class="banner-arrow prev" id="banner-prev" aria-label="Anterior">‹</button>
+  <button class="banner-arrow next" id="banner-next" aria-label="Próximo">›</button>
+  <div class="banner-nav" id="banner-dots"></div>
+</div>
+
+<!-- HERO -->
+<section class="hero" aria-label="Lixinho Tropical">
+  <div class="hero-bg-img" role="img" aria-label="Lixinho Tropical"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Música Safada Brasileira</p>
+    <h1 class="hero-title">
+      <span class="line-red">LIXINHO</span>
+      <span class="line-cyan">Tropical</span>
+    </h1>
+    <div class="hero-actions">
+      <a href="pages/agenda.html" class="btn btn-red">Ver Agenda →</a>
+      <a href="pages/contato.html" class="btn btn-outline">Contrate</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER COMPLETO -->
+<footer style="background:var(--gray-dark);border-top:1px solid rgba(245,240,232,0.06);padding:4rem 0 2rem">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/img/logo_cortado.png" alt="Lixinho Tropical" style="height:48px;margin-bottom:1.25rem">
+        <p class="footer-tagline">Música Safada Brasileira</p>
+        <div class="footer-socials" style="margin-top:1.5rem">
+          <a href="https://www.instagram.com/lixinhotropical/" class="social-link social-ig" aria-label="Instagram" target="_blank" rel="noopener"><span data-social-icon="instagram"></span></a>
+          <a href="https://open.spotify.com/intl-pt/artist/3noX4LW5rgdaEjRDBNDcei" class="social-link social-sp" aria-label="Spotify" target="_blank" rel="noopener"><span data-social-icon="spotify"></span></a>
+          <a href="https://soundcloud.com/lixinho-tropical" class="social-link social-sc" aria-label="SoundCloud" target="_blank" rel="noopener"><span data-social-icon="soundcloud"></span></a>
+          <a href="https://www.youtube.com/@lixinhotropical" class="social-link social-yt" aria-label="YouTube" target="_blank" rel="noopener"><span data-social-icon="youtube"></span></a>
+          <a href="https://www.tiktok.com/@lixinhotropical" class="social-link social-tt" aria-label="TikTok" target="_blank" rel="noopener"><span data-social-icon="tiktok"></span></a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Navegação</p>
+        <ul class="footer-col-links">
+          <li><a href="pages/sobre.html">A Banda</a></li>
+          <li><a href="pages/show.html">O Show</a></li>
+          <li><a href="pages/fotos.html">Fotos</a></li>
+          <li><a href="pages/videos.html">Vídeos</a></li>
+          <li><a href="pages/clipping.html">Clipping</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Mais</p>
+        <ul class="footer-col-links">
+          <li><a href="pages/agenda.html">Agenda de Shows</a></li>
+          <li><a href="pages/musicas.html">Músicas</a></li>
+          <li><a href="pages/contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contato</p>
+        <ul class="footer-col-links">
+          <li><a href="mailto:lixinhotropical@gmail.com">lixinhotropical@gmail.com</a></li>
+          <li><a href="https://wa.me/5511984214384" target="_blank" rel="noopener">(11) 98421-4384</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Lixinho Tropical. Todos os direitos reservados.</p>
+      <nav class="footer-legal">
+        <a href="pages/cookies.html">Política de Cookies</a>
+        <a href="pages/termos.html">Termos de Uso</a>
+        <a href="pages/suporte.html">Ajuda & Suporte</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" role="dialog" aria-label="Aviso de cookies" style="display:none;position:fixed;bottom:4rem;left:50%;transform:translateX(-50%);width:min(600px,calc(100% - 2rem));background:var(--gray-dark);border:1px solid rgba(232,0,28,0.3);border-radius:4px;padding:1.25rem 1.5rem;display:none;align-items:center;gap:1.5rem;flex-wrap:wrap;z-index:9999;box-shadow:0 8px 32px rgba(0,0,0,.6)">
+  <p style="font-size:0.83rem;color:rgba(245,240,232,0.7);flex:1;min-width:200px">Usamos cookies para melhorar sua experiência. <a href="pages/cookies.html" style="color:var(--cyan);text-decoration:underline">Saiba mais</a>.</p>
+  <div style="display:flex;gap:0.75rem">
+    <button id="cookie-accept" style="font-size:0.78rem;padding:0.55rem 1.2rem;border-radius:2px;font-weight:600;background:var(--red);color:var(--white);border:none;cursor:pointer">Aceitar</button>
+    <button id="cookie-decline" style="font-size:0.78rem;padding:0.55rem 1.2rem;border-radius:2px;font-weight:600;border:1px solid rgba(245,240,232,0.2);color:rgba(245,240,232,0.6);background:none;cursor:pointer">Recusar</button>
+  </div>
+</div>
+
+<script src="js/global.js"></script>
+<script src="js/social-icons.js"></script>
+<script>
+/* ── BANNER ROTATIVO ── */
+(function() {
+  const slides = document.querySelectorAll('.banner-slide');
+  const dotsContainer = document.getElementById('banner-dots');
+  let current = 0;
+  let timer;
+
+  // Criar dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'banner-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+    resetTimer();
+  }
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 5000);
+  }
+  document.getElementById('banner-prev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('banner-next').addEventListener('click', () => goTo(current + 1));
+
+  // Swipe no mobile
+  let touchStartX = 0;
+  const banner = document.getElementById('banner');
+  banner.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+  banner.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+  }, {passive:true});
+
+  resetTimer();
+})();
+
+/* ── HAMBURGER ── */
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobile-nav');
+const mobileClose = document.getElementById('mobile-nav-close');
+hamburger?.addEventListener('click', () => { mobileNav.classList.add('open'); document.body.style.overflow = 'hidden'; });
+mobileClose?.addEventListener('click', () => { mobileNav.classList.remove('open'); document.body.style.overflow = ''; });
+mobileNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileNav.classList.remove('open'); document.body.style.overflow = ''; }));
+
+/* ── COOKIE ── */
+const COOKIE_KEY = 'lt_cookie_consent';
+const banner2 = document.getElementById('cookie-banner');
+if (banner2 && !localStorage.getItem(COOKIE_KEY)) { banner2.style.display = 'flex'; }
+document.getElementById('cookie-accept')?.addEventListener('click', () => { localStorage.setItem(COOKIE_KEY,'accepted'); banner2.style.display='none'; });
+document.getElementById('cookie-decline')?.addEventListener('click', () => { localStorage.setItem(COOKIE_KEY,'declined'); banner2.style.display='none'; });
+</script>
 </body>
-
 </html>
